@@ -1,0 +1,24 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+---
+
+<!-- x42 y94 -->
+<header class="flex justify-between py-8 px-16">
+    <div class="flex items-center gap-3">
+        <h2 class="text-gradient font-bold text-lg title-gradient-down uppercase">skrazzo.xyz</h2>
+        <span class="text-dimmer uppercase font-semibold text-xs border-2 border-dimmer rounded-[3px] px-1.5"
+            >portfolio</span
+        >
+    </div>
+    <div class="flex items-center gap-8">
+        <HeaderLink name="About me" href="/about-me" />
+        <HeaderLink name="My projects" href="/projects" />
+        <HeaderLink name="Contact me" href="/contact" />
+    </div>
+</header>
+
+<style>
+    header {
+        padding: var(--padding-y) var(--padding-x);
+    }
+</style>

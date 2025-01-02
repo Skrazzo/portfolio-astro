@@ -1,0 +1,34 @@
+---
+interface Props {
+    name: string;
+    href: string;
+}
+
+const { name, href } = Astro.props;
+---
+
+<a class:list={["text-dimmed", "text-md", { active: false }]} href={href}>{name}</a>
+
+<style>
+    a {
+        font-weight: 600;
+        font-size: var(--text-md);
+
+        padding: 1rem;
+        border-radius: 1rem;
+
+        transition: 250ms;
+
+        border: 2px solid transparent;
+
+        &:hover {
+            scale: 1.02;
+            color: var(--text);
+        }
+    }
+
+    .active {
+        background-color: var(--panel-background);
+        border: var(--panel-stroke);
+    }
+</style>

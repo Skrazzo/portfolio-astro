@@ -1,3 +1,4 @@
+// for extended variables to work, global.css needs to be included
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -7,7 +8,15 @@ export default {
                 background: "var(--background)",
                 light: "var(--text)",
                 dimmed: "var(--text-dimmed)",
+                dimmer: "var(--text-dimmer)",
                 accent: "var(--accent)",
+            },
+            fontSize: {
+                title: "var(--text-title)",
+                lg: "var(--text-lg)",
+                md: "var(--text-md)",
+                sm: "var(--text-sm)",
+                xs: "var(--text-xs)",
             },
         },
     },

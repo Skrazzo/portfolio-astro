@@ -1,6 +1,50 @@
 :root {
+    /* colors */
     --background: #000113;
     --text: #e5e7f2;
     --text-dimmed: #a5a8b9;
+    --text-dimmer: #85868c;
     --accent: #b75bea;
+
+    /* font sizes */
+    --text-title: 60px;
+    --text-lg: 36px;
+    --text-md: 30px;
+    --text-sm: 24px;
+    --text-xs: 15px;
+
+    /* for panels */
+    --panel-background: #e5e7f205;
+    --panel-stroke: #e5e7f210 2px solid;
+
+    /* Main page */
+    --padding-y: 44px;
+    --padding-x: 96px;
+}
+
+@font-face {
+    font-family: SourceCodePro;
+    src: url("/fonts/SourceCodePro.ttf") format("truetype");
+}
+
+* {
+    font-family: SourceCodePro;
+}
+
+/* Text gradients */
+/* Direction of gradient is specified by brighter color */
+
+.title-gradient-down {
+    background: -webkit-linear-gradient(var(--text-dimmer), var(--text));
+}
+
+.title-gradient-right {
+    background: -webkit-linear-gradient(0deg, var(--text-dimmed), var(--text));
+}
+
+/* Text gradient needs to be applied so that gradient works */
+.text-gradient {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
