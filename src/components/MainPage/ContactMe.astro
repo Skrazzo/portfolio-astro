@@ -1,5 +1,65 @@
-<!-- 120x 150y -->
-<div class="button-container">
-    <button>contact me</button>
-    <!-- Circle div components here: -->
+---
+import GradientCircle from "./GradientCircle.astro";
+import Gradient from "javascript-color-gradient";
+import type { HexColor } from "types";
+
+// Define gradient startColor and endColor, and circleEndColor
+const circleIncreasePx: number = 175;
+const endColor: `#${string}` = "#301679"; // This color is used for gradient end color in a circle
+
+/*
+    Generate gradient colors for circles, and define circle size increase in pixels
+    000113 -> dark background
+    ad55e7 -> accent color
+*/
+let gradientArray = new Gradient().setColorGradient("#000005", "#ad55e7").setMidpoint(10).getColors() as `#${string}`[];
+gradientArray = gradientArray.reverse();
+---
+
+<div class="overflow-checker">
+    <div class="contact-me-container">
+        <button class="text-md font-bold uppercase text-background">contact me</button>
+        <!-- Circle div components here: -->
+
+        {
+            gradientArray.map((startColor, idx) => (
+                <GradientCircle
+                    w={`${circleIncreasePx * (idx + 1)}px`}
+                    h={`${circleIncreasePx * (idx + 1)}px`}
+                    zIndex={(idx + 1) * -1}
+                    startColor={startColor}
+                    endColor={endColor}
+                    deg="135deg"
+                />
+            ))
+        }
+    </div>
 </div>
+
+<style>
+    .overflow-checker {
+        top: 0;
+        left: 0;
+
+        width: 100dvw;
+        height: 100dvh;
+
+        position: fixed;
+        z-index: -1;
+    }
+
+    .contact-me-container {
+        position: absolute;
+        display: grid;
+        place-items: center;
+
+        bottom: calc(var(--padding-y) * 2);
+        right: var(--padding-x);
+    }
+
+    button {
+        padding: 26px 56px;
+        border-radius: 96px;
+        background: linear-gradient(125deg, var(--text), var(--accent-light));
+    }
+</style>

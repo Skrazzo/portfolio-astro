@@ -1,0 +1,28 @@
+---
+interface Props {
+    w: `${number}px`;
+    h: `${number}px`;
+    zIndex: number;
+    startColor: `#${string}`;
+    endColor: `#${string}`;
+    deg: `${number}deg`;
+}
+
+const props = Astro.props;
+---
+
+<div class="circle"></div>
+
+<style define:vars={{ ...props }}>
+    .circle {
+        position: absolute;
+        width: calc(100% + var(--w));
+        height: calc(100% + var(--h));
+
+        z-index: var(--zIndex);
+        border-radius: 10000px;
+
+        /* Implement gradient */
+        background: linear-gradient(var(--deg), var(--startColor), var(--endColor));
+    }
+</style>

@@ -10,6 +10,7 @@ export default {
                 dimmed: "var(--text-dimmed)",
                 dimmer: "var(--text-dimmer)",
                 accent: "var(--accent)",
+                "accent-light": "var(--accent-light)",
             },
             fontSize: {
                 title: "var(--text-title)",

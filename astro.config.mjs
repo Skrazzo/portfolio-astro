@@ -6,9 +6,9 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 // TODO: Add sitemap maybe
 export default defineConfig({
-  devToolbar: {
-      enabled: true,
-  },
+    devToolbar: {
+        enabled: true,
+    },
 
-  integrations: [tailwind()],
+    integrations: [tailwind()],
 });
