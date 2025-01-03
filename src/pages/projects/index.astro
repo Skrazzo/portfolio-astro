@@ -1,0 +1,33 @@
+<body style="background-color: white">
+    <div class="rec"></div>
+    <svg id="filter">
+        <filter id="noise">
+            <feTurbulence baseFrequency="0.8" result="colorNoise"></feTurbulence>
+            <feColorMatrix
+                in="colorNoise"
+                type="matrix"
+                values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"></feColorMatrix>
+            <feComposite operator="in" in2="SourceGraphic" result="monoNoise"></feComposite>
+            <feBlend in="SourceGraphic" in2="monoNoise" mode="multiply"></feBlend>
+        </filter>
+    </svg>
+</body>
+
+<style>
+    .rec {
+        width: 200px;
+        height: 200px;
+
+        background-color: red;
+
+        filter: url(#noise);
+    }
+
+    .noisy {
+        filter: url(#noise);
+    }
+
+    #filter {
+        visibility: hidden;
+    }
+</style>

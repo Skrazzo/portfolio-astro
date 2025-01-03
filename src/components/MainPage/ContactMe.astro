@@ -5,14 +5,14 @@ import type { HexColor } from "types";
 
 // Define gradient startColor and endColor, and circleEndColor
 const circleIncreasePx: number = 175;
-const endColor: `#${string}` = "#301679"; // This color is used for gradient end color in a circle
+const endColor: HexColor = "#301679"; // This color is used for gradient end color in a circle
 
 /*
     Generate gradient colors for circles, and define circle size increase in pixels
     000113 -> dark background
     ad55e7 -> accent color
 */
-let gradientArray = new Gradient().setColorGradient("#000005", "#ad55e7").setMidpoint(10).getColors() as `#${string}`[];
+let gradientArray = new Gradient().setColorGradient("#000005", "#ad55e7").setMidpoint(10).getColors() as HexColor[];
 gradientArray = gradientArray.reverse();
 ---
 
@@ -20,7 +20,6 @@ gradientArray = gradientArray.reverse();
     <div class="contact-me-container">
         <button class="text-md font-bold uppercase text-background">contact me</button>
         <!-- Circle div components here: -->
-
         {
             gradientArray.map((startColor, idx) => (
                 <GradientCircle

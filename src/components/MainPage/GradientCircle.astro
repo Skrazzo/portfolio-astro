@@ -1,17 +1,22 @@
 ---
+import type { HexColor } from "types/colors";
+import SvgNoiseOverylay from "~components/SvgNoiseOverylay.astro";
+
 interface Props {
     w: `${number}px`;
     h: `${number}px`;
     zIndex: number;
-    startColor: `#${string}`;
-    endColor: `#${string}`;
+    startColor: HexColor;
+    endColor: HexColor;
     deg: `${number}deg`;
 }
 
 const props = Astro.props;
 ---
 
-<div class="circle"></div>
+<div class="circle">
+    <SvgNoiseOverylay rgb={[19, 8, 41]} opacity={0.5} />
+</div>
 
 <style define:vars={{ ...props }}>
     .circle {
@@ -24,5 +29,6 @@ const props = Astro.props;
 
         /* Implement gradient */
         background: linear-gradient(var(--deg), var(--startColor), var(--endColor));
+        overflow: hidden;
     }
 </style>

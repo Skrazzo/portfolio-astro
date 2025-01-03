@@ -1,0 +1,50 @@
+---
+interface Props {
+    baseFreq?: number;
+    octaves?: number;
+    rgb: [number, number, number];
+    contrast?: number;
+    opacity: number;
+}
+
+const { baseFreq = 0.65, octaves = 3, contrast = 0.8, rgb, opacity }: Props = Astro.props;
+---
+
+<div class="w-full h-full noisy"></div>
+
+<svg id="filter">
+    <defs>
+        <filter id="noise">
+            <!-- Create base noise texture -->
+            <feTurbulence type="fractalNoise" baseFrequency={baseFreq} numOctaves={octaves} stitchTiles="stitch"
+            ></feTurbulence>
+
+            <!-- Colorize the noise -->
+            <feColorMatrix
+                type="matrix"
+                values=`0 0 0 0 ${rgb[0] / 255} 
+                      0 0 0 0 ${rgb[1] / 255}
+                      0 0 0 0 ${rgb[2] / 255}
+                      0 0 0 1 0`
+            ></feColorMatrix>
+
+            <!-- Adjust contrast -->
+            <feComponentTransfer>
+                <feFuncR type="linear" slope={contrast} intercept="-0.1"></feFuncR>
+                <feFuncG type="linear" slope={contrast} intercept="-0.1"></feFuncG>
+                <feFuncB type="linear" slope={contrast} intercept="-0.1"></feFuncB>
+            </feComponentTransfer>
+        </filter>
+    </defs>
+</svg>
+
+<style define:vars={{ opacity }}>
+    #filter {
+        visibility: hidden;
+    }
+
+    .noisy {
+        filter: url(#noise);
+        opacity: var(--opacity);
+    }
+</style>
