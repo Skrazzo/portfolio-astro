@@ -12,12 +12,14 @@ const { name, href } = Astro.props;
 <style>
     a {
         font-weight: 600;
-        font-size: var(--text-md);
+        font-size: clamp(var(--text-mobile-md), 2.1vw, var(--text-md));
 
         padding: 1rem;
         border-radius: 1rem;
 
-        transition: 250ms;
+        transition:
+            scale 250ms ease,
+            color 250ms ease;
 
         border: 2px solid transparent;
 

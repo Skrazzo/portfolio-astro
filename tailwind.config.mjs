@@ -13,11 +13,19 @@ export default {
                 "accent-light": "var(--accent-light)",
             },
             fontSize: {
+                // Normal font sizes
                 title: "var(--text-title)",
                 lg: "var(--text-lg)",
                 md: "var(--text-md)",
                 sm: "var(--text-sm)",
                 xs: "var(--text-xs)",
+
+                // Mobile font sizes
+                "mobile-title": "var(--text-mobile-title)",
+                "mobile-lg": "var(--text-mobile-lg)",
+                "mobile-md": "var(--text-mobile-md)",
+                "mobile-sm": "var(--text-mobile-sm)",
+                "mobile-xs": "var(--text-mobile-xs)",
             },
         },
     },

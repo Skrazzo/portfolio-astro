@@ -7,12 +7,18 @@
     --accent: #b75bea;
     --accent-light: #e6befd;
 
-    /* font sizes */
+    /* font sizes mixed with font sizes for mobile */
     --text-title: 60px;
     --text-lg: 36px;
     --text-md: 30px;
     --text-sm: 24px;
-    --text-xs: 15px;
+    --text-xs: 16px;
+
+    --text-mobile-title: 24px;
+    --text-mobile-lg: 18px;
+    --text-mobile-md: 20px;
+    --text-mobile-sm: 16px;
+    --text-mobile-xs: 8px;
 
     /* for panels */
     --panel-background: #e5e7f205;

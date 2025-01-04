@@ -1,5 +1,5 @@
 <main class="flex flex-col gap-12">
-    <h1 class="text-gradient title-gradient-right w-fit text-title font-bold">I'm Leons,<br />Full-stack developer</h1>
+    <h1 class="text-gradient title-gradient-right w-fit font-bold">I'm Leons,<br />Full-stack developer</h1>
     <p class="text-dimmed font-semibold text-lg w-[454px]">Developer with strong dedication to coding and learning</p>
 </main>
 
@@ -9,5 +9,9 @@
         position: absolute;
         top: 40%;
         left: var(--padding-x);
+    }
+
+    h1 {
+        font-size: clamp(var(--text-mobile-title), 5vw, var(--text-title));
     }
 </style>
