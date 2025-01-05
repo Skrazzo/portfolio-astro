@@ -1,0 +1,17 @@
+<div class="drawer">Hello world</div>
+
+<style>
+    .drawer {
+        position: fixed;
+        left: 100px;
+        top: 0;
+        background-color: aliceblue;
+        height: 100%;
+        width: 100px;
+    }
+</style>
+
+<script>
+    import DrawerToggle from "~utils/DrawerToggle";
+    new DrawerToggle({ drawerClass: "drawer", triggerClasses: ["menu-button"] });
+</script>

@@ -22,7 +22,7 @@
 
     /* for panels */
     --panel-background: #e5e7f205;
-    --panel-stroke: #e5e7f210 2px solid;
+    --panel-border: #e5e7f210;
 
     /* Main page */
     --padding-y: 44px;

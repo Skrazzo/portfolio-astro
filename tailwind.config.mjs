@@ -11,6 +11,8 @@ export default {
                 dimmer: "var(--text-dimmer)",
                 accent: "var(--accent)",
                 "accent-light": "var(--accent-light)",
+                "panel-background": "var(--panel-background)",
+                "panel-border": "var(--panel-border)",
             },
             fontSize: {
                 // Normal font sizes
@@ -26,6 +28,13 @@ export default {
                 "mobile-md": "var(--text-mobile-md)",
                 "mobile-sm": "var(--text-mobile-sm)",
                 "mobile-xs": "var(--text-mobile-xs)",
+            },
+            screens: {
+                sm: "640px",
+                md: "768px",
+                lg: "1024px",
+                xl: "1280px",
+                "2xl": "1536px",
             },
         },
     },

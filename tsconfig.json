@@ -10,7 +10,8 @@
             "~styles/*": ["styles/*"],
             "~pages/*": ["pages/*"],
             "~layouts/*": ["layouts/*"],
-            "~components/*": ["components/*"]
+            "~components/*": ["components/*"],
+            "~utils/*": ["utils/*"]
         }
     }
 }

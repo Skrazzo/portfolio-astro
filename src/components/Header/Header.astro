@@ -1,19 +1,25 @@
 ---
+import { Icon } from "astro-icon/components";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<header class="flex justify-between py-8 px-16">
+<header class="flex md:justify-between items-center py-8 px-16">
+    <div
+        class="menu-button md:hidden mr-3 p-[6px] bg-panel-background border-2 border-panel-border rounded-md cursor-pointer"
+    >
+        <Icon class={"text-light"} name={"menu"} />
+    </div>
     <div class="flex items-center gap-3">
         <h2 class="text-gradient font-bold title-gradient-down uppercase">skrazzo.xyz</h2>
         <span class="text-dimmer uppercase font-semibold text-xs border-2 border-dimmer rounded-[3px] px-1.5"
             >portfolio</span
         >
     </div>
-    <div class="flex items-center gap-4 lg:gap-8">
+    <nav class="hidden md:flex items-center md:gap-4 lg:gap-8">
         <HeaderLink name="About me" href="/about-me" />
         <HeaderLink name="My projects" href="/projects" />
         <HeaderLink name="Contact me" href="/contact" />
-    </div>
+    </nav>
 </header>
 
 <style>
@@ -22,6 +28,15 @@ import HeaderLink from "./HeaderLink.astro";
     }
 
     h2 {
-        font-size: clamp(var(--text-mobile-lg), 3vw, var(--text-lg));
+        font-size: clamp(var(--text-mobile-lg), 7vw, var(--text-lg));
+    }
+
+    span {
+        font-size: clamp(var(--text-mobile-xs), 3vw, var(--text-xs));
+    }
+
+    svg {
+        width: clamp(24px, 7vw, 36px);
+        height: clamp(24px, 7vw, 36px);
     }
 </style>
