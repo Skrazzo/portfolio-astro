@@ -1,13 +1,25 @@
-<div class="drawer">Hello world</div>
+---
+import Header from "./Header.astro";
+import Waves from "~components/Waves.astro";
+---
+
+<div class="drawer flex flex-col justify-between md:hidden">
+    <Header iconName="close" />
+    <div class="bg-background">
+        <Waves className="w-full" />
+    </div>
+</div>
 
 <style>
     .drawer {
         position: fixed;
-        left: 100px;
+        left: 0;
         top: 0;
-        background-color: aliceblue;
+
         height: 100%;
-        width: 100px;
+        width: 100%;
+
+        background-color: var(--background);
     }
 </style>
 
