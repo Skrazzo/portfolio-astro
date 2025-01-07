@@ -3,10 +3,11 @@ import Header from "./Header.astro";
 import Waves from "~components/Waves.astro";
 ---
 
-<div class="drawer flex flex-col justify-between md:hidden">
+<div class="drawer flex-col justify-between hidden">
     <Header iconName="close" />
-    <div class="bg-background">
+    <div class="relative">
         <Waves className="w-full" />
+        <div class="w-full h-full bg-background opacity-40 absolute top-0"></div>
     </div>
 </div>
 
@@ -19,11 +20,19 @@ import Waves from "~components/Waves.astro";
         height: 100%;
         width: 100%;
 
+        opacity: 0;
+        transition: 1s;
+
         background-color: var(--background);
     }
-</style>
 
-<script>
-    import DrawerToggle from "~utils/DrawerToggle";
-    new DrawerToggle({ drawerClass: "drawer", triggerClasses: ["menu-button"] });
-</script>
+    .menu-drawer-open {
+        display: flex;
+        opacity: 1;
+
+        /* Show hidden nav links */
+        nav {
+            display: flex;
+        }
+    }
+</style>

@@ -11,7 +11,8 @@ import HeaderLink from "./HeaderLink.astro";
 
 <header class="flex max-md:flex-wrap md:justify-between items-center py-8 px-16">
     <div
-        class="menu-button md:hidden mr-3 p-[6px] bg-panel-background border-2 border-panel-border rounded-md cursor-pointer"
+        class="md:hidden mr-3 p-[6px] bg-panel-background border-2 border-panel-border rounded-md cursor-pointer"
+        onclick="toggleDrawer()"
     >
         <Icon stroke-width={3} class={"text-light"} name={iconName} />
     </div>
@@ -21,7 +22,9 @@ import HeaderLink from "./HeaderLink.astro";
             >portfolio</span
         >
     </div>
-    <nav class="max-md:mt-8 max-md:flex-col max-md:w-full flex gap-4 md:items-center md:gap-2 md:text-center lg:gap-8">
+    <nav
+        class="max-md:mt-8 max-md:flex-col max-md:w-full hidden gap-4 md:items-center md:gap-2 md:text-center lg:gap-8"
+    >
         <HeaderLink name="About me" href="/about-me" />
         <HeaderLink name="My projects" href="/projects" />
         <HeaderLink name="Contact me" href="/contact" />
@@ -46,3 +49,14 @@ import HeaderLink from "./HeaderLink.astro";
         height: clamp(24px, 7vw, 36px);
     }
 </style>
+
+<script is:inline>
+    function toggleDrawer() {
+        const drawer = document.querySelector(".drawer");
+        if (drawer) {
+            drawer.classList.toggle("menu-drawer-open");
+        } else {
+            throw new Error("Could not find drawer element");
+        }
+    }
+</script>
