@@ -1,21 +1,27 @@
 ---
 interface Props {
     iconName: string;
+    showBurger: boolean;
 }
 
-const { iconName = "menu" }: Props = Astro.props;
+const { iconName = "menu", showBurger }: Props = Astro.props;
 
 import { Icon } from "astro-icon/components";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header class="flex max-md:flex-wrap md:justify-between items-center py-8 px-16">
-    <div
-        class="md:hidden mr-3 p-[6px] bg-panel-background border-2 border-panel-border rounded-md cursor-pointer"
-        onclick="toggleDrawer()"
-    >
-        <Icon stroke-width={3} class={"text-light"} name={iconName} />
-    </div>
+    {
+        showBurger && (
+            <div
+                class="md:hidden mr-3 p-[6px] bg-panel-background border-2 border-panel-border rounded-md cursor-pointer"
+                onclick="toggleDrawer()"
+            >
+                <Icon stroke-width={3} class={"text-light"} name={iconName} />
+            </div>
+        )
+    }
+
     <div class="flex items-center gap-3">
         <h2 class="text-gradient font-bold title-gradient-down uppercase">skrazzo.xyz</h2>
         <span class="text-dimmer uppercase font-semibold text-xs border-2 border-dimmer rounded-[3px] px-1.5"
@@ -23,7 +29,7 @@ import HeaderLink from "./HeaderLink.astro";
         >
     </div>
     <nav
-        class="max-md:mt-8 max-md:flex-col max-md:w-full hidden gap-4 md:items-center md:gap-2 md:text-center lg:gap-8"
+        class="max-md:mt-8 max-md:flex-col max-md:w-full hidden gap-4 md:flex md:items-center md:gap-2 md:text-center lg:gap-8"
     >
         <HeaderLink name="About me" href="/about-me" />
         <HeaderLink name="My projects" href="/projects" />
@@ -37,7 +43,7 @@ import HeaderLink from "./HeaderLink.astro";
     }
 
     h2 {
-        font-size: clamp(var(--text-mobile-lg), 7vw, var(--text-lg));
+        font-size: clamp(var(--text-mobile-lg), 6vw, var(--text-lg));
     }
 
     span {

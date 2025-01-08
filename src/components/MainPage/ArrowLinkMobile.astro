@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    href: string;
+    text: string;
+}
+
+const { href, text }: Props = Astro.props;
+---
+
+<a href={href} class="flex items-center gap-2 text-light">
+    <Icon name={"arrowRight"} stroke-width={2} width={24} height={24} />
+    <span class="font-semibold">{text}</span>
+</a>
+
+<style>
+    span {
+        font-size: clamp(var(--text-mobile-lg), 4.5vw, var(--text-lg));
+    }
+</style>

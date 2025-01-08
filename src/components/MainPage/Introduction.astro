@@ -1,20 +1,30 @@
-<main class="flex flex-col gap-12">
-    <h1 class="text-gradient title-gradient-right w-fit font-bold">I'm Leons,<br />Full-stack developer</h1>
-    <p class="text-dimmed font-semibold text-lg w-[454px]">Developer with strong dedication to coding and learning</p>
+---
+import ArrowLinkMobile from "./ArrowLinkMobile.astro";
+---
+
+<main class="flex flex-col gap-4 md:gap-12 absolute top-[130px] md:top-[40%]">
+    <h1 class="text-light w-fit font-semibold md:font-bold">
+        I'm Leons,<br />Full-stack developer
+    </h1>
+    <p class="text-dimmed font-semibold text-lg max-w-full w-[275px] md:w-[454px]">
+        Developer with strong dedication to coding and learning
+    </p>
+    <div class="flex items-center gap-6 md:hidden">
+        <ArrowLinkMobile href="/about-me" text="About me" />
+        <ArrowLinkMobile href="/projects" text="My projects" />
+    </div>
 </main>
 
 <style>
     main {
-        position: absolute;
-        top: 40%;
         left: var(--padding-x);
     }
 
     h1 {
-        font-size: clamp(var(--text-mobile-title), 5vw, var(--text-title));
+        font-size: clamp(var(--text-mobile-title), 6vw, var(--text-title));
     }
 
     p {
-        font-size: clamp(var(--text-mobile-lg), 3vw, var(--text-lg));
+        font-size: clamp(var(--text-mobile-lg), 4.5vw, var(--text-lg));
     }
 </style>
