@@ -1,6 +1,7 @@
 :root {
     /* colors */
     --background: #000113;
+    --background-opacity: #00011380;
     --text: #e5e7f2;
     --text-dimmed: #a5a8b9;
     --text-dimmer: #85868c;
@@ -54,4 +55,11 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 1050px) {
+    :root {
+        --padding-y: 44px;
+        --padding-x: 32px;
+    }
 }

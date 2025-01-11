@@ -6,6 +6,7 @@ export default {
         extend: {
             colors: {
                 background: "var(--background)",
+                "background-opacity": "var(--background-opacity)",
                 light: "var(--text)",
                 dimmed: "var(--text-dimmed)",
                 dimmer: "var(--text-dimmer)",

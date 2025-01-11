@@ -1,0 +1,22 @@
+---
+import InfoPage from "~layouts/InfoPage.astro";
+import { SEO } from "astro-seo";
+---
+
+<InfoPage>
+    <div slot="head">
+        <SEO
+            title="Skrazzo - Full-Stack Developer"
+            description="Discover the journey of Skrazzo, a passionate full-stack developer with a love for technology and gaming. Learn about my early interest in scripting, my transition to web development, and my current expertise in full-stack development."
+            openGraph={{
+                basic: {
+                    title: "Skrazzo - Full-Stack Developer",
+                    type: "Website",
+                    image: "/me.png",
+                },
+            }}
+        />
+    </div>
+
+    <div></div>
+</InfoPage>

@@ -1,5 +1,5 @@
 ---
-import GradientCircle from "./GradientCircle.astro";
+import GradientCircle from "~components/GradientCircle.astro";
 import Gradient from "javascript-color-gradient";
 import type { HexColor } from "types";
 
@@ -20,8 +20,11 @@ gradientArray = gradientArray.reverse();
     <div class="contact-me-container absolute grid place-items-center max-md:hidden">
         <button
             class="text-md font-bold uppercase text-background hover:scale-[1.025] transition duration-300"
-            onclick="toggleDrawer">contact me</button
+            onclick="window.location.href='/contact'"
         >
+            contact me
+        </button>
+
         <!-- Circle div components here: -->
         {
             gradientArray.map((startColor, idx) => (

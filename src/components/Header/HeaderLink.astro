@@ -5,11 +5,14 @@ interface Props {
 }
 
 const { name, href } = Astro.props;
+
+// Get current link and understand if this page is active or not
+const active = Astro.url.pathname === href;
 ---
 
 <a
     class="px-0 md:px-4 font-semibold border-2 border-transparent decoration-transparent w-fit"
-    class:list={["text-dimmed", "text-md", { active: false }]}
+    class:list={["text-dimmed", "text-md", { active }]}
     href={href}>{name}</a
 >
 
