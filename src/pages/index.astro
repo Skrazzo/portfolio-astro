@@ -3,15 +3,51 @@ import Blank from "~layouts/Blank.astro";
 import Header from "~components/Header/Header.astro";
 import Introduction from "~components/MainPage/Introduction.astro";
 import ContactMe from "~components/MainPage/ContactMe.astro";
+import Waves from "~components/Waves.astro";
 ---
 
 <Blank>
+    <!-- For pc and mobile view -->
     <Header iconName="menu" showBurger={true} />
+    <!-- For pc and mobile view -->
     <Introduction />
+    <!-- For mobile contact me  -->
+    <div class="md:hidden text-light mt-14 ml-[var(--padding-x)]">
+        <a
+            class="contact-me rounded-full py-4 px-7 bg-white text-background uppercase font-bold text-mobile-lg"
+            href="/contact">contact me</a
+        >
+    </div>
+
+    <!-- For pc view -->
     <ContactMe />
+
+    <!-- Svg waves for mobile view -->
+    <div class="bottom-0 absolute w-full md:hidden">
+        <Waves className="w-full" />
+    </div>
 </Blank>
 
 <style>
+    .contact-me {
+        background: linear-gradient(225deg, var(--text) 0%, #a077df 100%);
+        box-shadow: 0 0 64px 0 #b75bea50;
+        animation: contact-me-pulsate 10s infinite;
+    }
+
+    /* Animation for box shadow pulsating */
+    @keyframes contact-me-pulsate {
+        0% {
+            box-shadow: 0 0 64px 0 #b75bea00;
+        }
+        50% {
+            box-shadow: 0 0 64px 0 #b75bea90;
+        }
+        100% {
+            box-shadow: 0 0 64px 0 #b75bea00;
+        }
+    }
+
     @media (max-width: 1050px) {
         :root {
             --padding-y: 44px;

@@ -9,7 +9,7 @@ import icon from "astro-icon";
 // TODO: Add sitemap maybe
 export default defineConfig({
     devToolbar: {
-        enabled: true,
+        enabled: false,
     },
 
     integrations: [tailwind(), icon()],

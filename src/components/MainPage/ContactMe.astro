@@ -18,7 +18,10 @@ gradientArray = gradientArray.reverse();
 
 <div class="overflow-checker">
     <div class="contact-me-container absolute grid place-items-center max-md:hidden">
-        <button class="text-md font-bold uppercase text-background" onclick="toggleDrawer">contact me</button>
+        <button
+            class="text-md font-bold uppercase text-background hover:scale-[1.025] transition duration-300"
+            onclick="toggleDrawer">contact me</button
+        >
         <!-- Circle div components here: -->
         {
             gradientArray.map((startColor, idx) => (

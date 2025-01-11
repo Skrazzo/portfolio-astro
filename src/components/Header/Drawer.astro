@@ -3,7 +3,7 @@ import Header from "./Header.astro";
 import Waves from "~components/Waves.astro";
 ---
 
-<div class="drawer flex-col justify-between hidden">
+<div class="drawer flex-col justify-between hidden" onclick="toggleDrawer()">
     <Header iconName="close" showBurger={true} />
     <div class="relative">
         <Waves className="w-full" />
@@ -28,11 +28,36 @@ import Waves from "~components/Waves.astro";
 
     .menu-drawer-open {
         display: flex;
-        opacity: 1;
+        /* opacity: 1; */
 
         /* Show hidden nav links */
         nav {
             display: flex;
+        }
+
+        /* open animation */
+        animation: fadeIn 300ms ease-in-out forwards;
+    }
+
+    .menu-drawer-close-anim {
+        animation: fadeOut 300ms ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
         }
     }
 </style>

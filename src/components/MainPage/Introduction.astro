@@ -2,7 +2,7 @@
 import ArrowLinkMobile from "./ArrowLinkMobile.astro";
 ---
 
-<main class="flex flex-col gap-4 md:gap-12 absolute top-[130px] md:top-[40%]">
+<main class="flex flex-col gap-4 md:gap-12 md:absolute md:top-[40%] ml-[var(--padding-x)]">
     <h1 class="text-light w-fit font-semibold md:font-bold">
         I'm Leons,<br />Full-stack developer
     </h1>
@@ -16,10 +16,6 @@ import ArrowLinkMobile from "./ArrowLinkMobile.astro";
 </main>
 
 <style>
-    main {
-        left: var(--padding-x);
-    }
-
     h1 {
         font-size: clamp(var(--text-mobile-title), 6vw, var(--text-title));
     }

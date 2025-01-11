@@ -60,7 +60,18 @@ import HeaderLink from "./HeaderLink.astro";
     function toggleDrawer() {
         const drawer = document.querySelector(".drawer");
         if (drawer) {
-            drawer.classList.toggle("menu-drawer-open");
+            // If drawer is open, show animation and close it
+            if (drawer.classList.contains("menu-drawer-open")) {
+                drawer.classList.add("menu-drawer-close-anim");
+
+                setTimeout(() => {
+                    drawer.classList.remove("menu-drawer-open");
+                    drawer.classList.remove("menu-drawer-close-anim");
+                }, 300);
+            } else {
+                // Add class to open drawer
+                drawer.classList.add("menu-drawer-open");
+            }
         } else {
             throw new Error("Could not find drawer element");
         }
