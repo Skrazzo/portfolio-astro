@@ -1,6 +1,12 @@
 ---
 import InfoPage from "~layouts/InfoPage.astro";
 import { SEO } from "astro-seo";
+import GlassContainer from "~components/GlassContainer.astro";
+import { Picture } from "astro:assets";
+import MePicture from "~assets/me.png";
+
+const [about] = Object.values(import.meta.glob("~markdown/about-me.md", { eager: true }));
+const { Content: AboutMeContent } = about;
 ---
 
 <InfoPage>
@@ -18,5 +24,17 @@ import { SEO } from "astro-seo";
         />
     </div>
 
-    <div></div>
+    <GlassContainer>
+        <h1 slot="title" class="text-gradient title-gradient-left">About me</h1>
+        <main class="flex">
+            <Picture
+                class="border-[3px] border-[#DAD5E2] bg-panel-border rounded-lg w-[400px] aspect-[0.768/1] object-cover"
+                src={MePicture}
+                alt={"Me sitting on railroads"}
+            />
+            <div class="text-light">
+                <AboutMeContent />
+            </div>
+        </main>
+    </GlassContainer>
 </InfoPage>

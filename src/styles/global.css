@@ -50,6 +50,10 @@
     background: -webkit-linear-gradient(0deg, var(--text-dimmed), var(--text));
 }
 
+.title-gradient-left {
+    background: -webkit-linear-gradient(180deg, var(--text-dimmed), var(--text));
+}
+
 /* Text gradient needs to be applied so that gradient works */
 .text-gradient {
     -webkit-background-clip: text;

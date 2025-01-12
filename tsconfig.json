@@ -11,7 +11,8 @@
             "~pages/*": ["pages/*"],
             "~layouts/*": ["layouts/*"],
             "~components/*": ["components/*"],
-            "~utils/*": ["utils/*"]
+            "~utils/*": ["utils/*"],
+            "~markdown/*": ["markdown/*"]
         }
     }
 }
