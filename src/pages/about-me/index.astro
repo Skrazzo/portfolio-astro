@@ -5,8 +5,8 @@ import GlassContainer from "~components/GlassContainer.astro";
 import { Picture } from "astro:assets";
 import MePicture from "~assets/me.png";
 
-const [about] = Object.values(import.meta.glob("~markdown/about-me.md", { eager: true }));
-const { Content: AboutMeContent } = about;
+// const [about] = Object.values(import.meta.glob("~markdown/about-me.md", { eager: true }));
+const { Content: AboutMeContent } = await import("~markdown/about-me.md");
 ---
 
 <InfoPage>
