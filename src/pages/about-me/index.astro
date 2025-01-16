@@ -26,15 +26,34 @@ const { Content: AboutMeContent } = await import("~markdown/about-me.md");
 
     <GlassContainer>
         <h1 slot="title" class="text-gradient title-gradient-left">About me</h1>
-        <main class="flex">
+        <main class="flex gap-12 mt-6">
             <Picture
-                class="border-[3px] border-[#DAD5E2] bg-panel-border rounded-lg w-[400px] aspect-[0.768/1] object-cover"
+                class="border-[3px] border-[#DAD5E2] bg-panel-border rounded-xl w-[384px] opacity-80 aspect-[0.8/1] object-cover"
                 src={MePicture}
                 alt={"Me sitting on railroads"}
             />
-            <div class="text-light">
+            <div class="text-light about-me-content">
                 <AboutMeContent />
             </div>
         </main>
     </GlassContainer>
 </InfoPage>
+
+<style>
+    .about-me-content {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--text-md) * 1.3);
+
+        font-size: clamp(var(--text-mobile-md), 3vw, var(--text-md));
+        letter-spacing: -1px;
+        line-height: calc(clamp(var(--text-mobile-md), 3vw, var(--text-md)) * 1.3);
+
+        h1 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+        }
+    }
+</style>
