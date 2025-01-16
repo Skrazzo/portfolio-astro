@@ -59,14 +59,16 @@ gradientArray = gradientArray.reverse();
                 }
             </div>
         </div>
-        <!-- Children  -->
-        <slot />
 
         <!-- Phone waves -->
         <div class="fixed bottom-0 w-screen md:hidden">
             <div class="w-full h-full absolute backdrop-blur-sm bg-background-opacity"></div>
             <Waves className="w-full" />
         </div>
+
+        <!-- Children  -->
+        <slot />
+
         <Drawer />
     </body>
 </html>

@@ -1,9 +1,14 @@
 ---
+interface Props {
+    className?: string;
+}
 
+const { className = "" } = Astro.props;
 ---
 
 <div
-    class={"w-full max-w-[calc(100%-72px)] md:max-w-[1200px] mx-auto px-12 py-6 rounded-2xl backdrop-blur md:bg-panel-background md:border-2 md:border-panel-border "}
+    class={"glass-container md:w-[92.5%] md:max-w-[1200px] mx-auto  md:p-12 md:pt-6 rounded-2xl backdrop-blur md:bg-panel-background md:border-2 md:border-panel-border " +
+        className}
 >
     <div class="title font-bold flex justify-center">
         <slot name="title" />
@@ -15,5 +20,11 @@
 <style>
     .title {
         font-size: clamp(var(--text-mobile-title), 6vw, var(--text-title));
+    }
+
+    @media (max-width: 768px) {
+        .glass-container {
+            padding: var(--padding-y) var(--padding-x);
+        }
     }
 </style>
