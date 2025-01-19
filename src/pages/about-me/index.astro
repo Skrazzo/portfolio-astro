@@ -2,41 +2,41 @@
 import InfoPage from "~layouts/InfoPage.astro";
 import { SEO } from "astro-seo";
 import GlassContainer from "~components/GlassContainer.astro";
-import { getImage, Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import MePicture from "~assets/me.png";
 import { Icon } from "astro-icon/components";
 import type { SkillsType, ImageMetadata } from "~types/data";
 import { getImageDominantColor, getProminentColorFromSVG } from "~utils/getImageDominantColor";
 import path from "path";
 import type { HexColor } from "~types/colors";
-// import asd from "../../assets/skills/css.svg";
-
+import Feedback from "~components/AboutMe/Feedback.astro";
 // Get about me text
-const { Content: AboutMeContent } = await import("~markdown/about-me.md");
+import { Content as AboutMeContent } from "~assets/about-me.md";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-// Get list of skills
-const skillsFiles = import.meta.glob<ImageMetadata>("~assets/skills/*.{svg,png}", { eager: true });
+// get list of skills, and process data
+const skillsFiles = import.meta.glob<ImageMetadata>("../../assets/skills/*.{svg,png}", { eager: true });
 const skills: SkillsType[] = [];
 
-// Skills image path
-const skillsPath = path.resolve(process.cwd(), "src/assets/skills"); // get skills folder -> project root + skills folder
+for (const [filePath, image] of Object.entries(skillsFiles)) {
+    // Get the base project directory
+    const projectRoot = process.cwd();
 
-for (const image of Object.values(skillsFiles)) {
-    // Get full filename with all the arguments
-    let fullFileName = image.default.src.split("/").pop(); // Gets last part of path
-    if (!fullFileName) return;
+    // Remove everything before "assets/skills" to get consistent path
+    const relativePath = filePath.split("assets/skills/").pop();
+    if (!relativePath) continue;
 
-    // Remove arguments
-    fullFileName = fullFileName.split("?")[0];
-    // Get file name without extension
+    // Construct full path that works in both dev and build
+    const fullPath = path.join(projectRoot, "src/assets/skills", relativePath);
+
+    let fullFileName = relativePath; // Just use the filename part
     const fileName = fullFileName.split(".")[0];
 
-    // Get image dominant color
     let color: HexColor;
     if (path.extname(fullFileName) === ".svg") {
-        color = getProminentColorFromSVG(path.join(skillsPath, fullFileName)) as HexColor;
+        color = getProminentColorFromSVG(fullPath) as HexColor;
     } else {
-        color = await getImageDominantColor(path.join(skillsPath, fullFileName));
+        color = await getImageDominantColor(fullPath);
     }
 
     skills.push({
@@ -45,6 +45,9 @@ for (const image of Object.values(skillsFiles)) {
         color: color,
     });
 }
+
+// Get feedback collections
+const feedbackCollection = (await getCollection("feedbacks")) as CollectionEntry<"feedbacks">[];
 ---
 
 <InfoPage>
@@ -67,7 +70,7 @@ for (const image of Object.values(skillsFiles)) {
     <GlassContainer className="md:mt-[60px]">
         <h1 slot="title" class="text-gradient title-gradient-left">About me</h1>
         <main class="flex max-md:flex-col gap-12 mt-6">
-            <Picture
+            <Image
                 class="border-[3px] border-[#DAD5E2] bg-panel-border rounded-xl max-md:object-top max-sm:h-[300px] max-md:h-[520px] md:w-[320px] lg:w-[384px] opacity-80 aspect-[0.8/1] object-cover"
                 src={MePicture}
                 alt={"Me sitting on railroads"}
@@ -79,19 +82,20 @@ for (const image of Object.values(skillsFiles)) {
     </GlassContainer>
 
     <!-- Arrow down -->
-    <div class="text-dimmed flex justify-center max-md:hidden mt-8">
+    <div class="text-dimmed flex justify-center max-md:hidden mt-12">
         <Icon class="animate-bounce-slow" name={"chevronDown"} stroke-width={2} width={54} height={54} />
     </div>
 
     <!-- My skills -->
-    <GlassContainer className="mt-[80px] md:mt-[520px]">
+    <GlassContainer className="mt-[80px] md:mt-[120px] mb-[120px]">
         <h3 slot="title" class="text-gradient title-gradient-left">My Skills</h3>
-        <div class="flex justify-center items-center flex-wrap mt-6 md:mt-10 gap-6 md:gap-12">
+        <div class="flex justify-center items-center flex-wrap mt-6 md:mt-8 gap-6 md:gap-12">
             {
                 skills.map((skill) => (
                     <div class="skill-item">
                         <span style={{ backgroundColor: skill.color }}>{skill.name}</span>
-                        <Picture
+
+                        <Image
                             class={"w-[56px] h-[56px] md:w-[96px] md:h-[96px]"}
                             loading={"lazy"}
                             src={skill.src}
@@ -101,6 +105,12 @@ for (const image of Object.values(skillsFiles)) {
                 ))
             }
         </div>
+    </GlassContainer>
+
+    <!-- Feedbacks -->
+    <GlassContainer className="mt-[80px] md:mt-[220px] mb-[120px]">
+        <h4 slot="title" class="text-gradient title-gradient-left">Feedbacks</h4>
+        {feedbackCollection.map((feedback) => <Feedback entry={feedback} />)}
     </GlassContainer>
 </InfoPage>
 
