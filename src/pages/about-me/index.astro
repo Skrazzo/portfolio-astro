@@ -2,14 +2,53 @@
 import InfoPage from "~layouts/InfoPage.astro";
 import { SEO } from "astro-seo";
 import GlassContainer from "~components/GlassContainer.astro";
-import { Picture } from "astro:assets";
+import { getImage, Picture } from "astro:assets";
 import MePicture from "~assets/me.png";
+import { Icon } from "astro-icon/components";
+import type { SkillsType, ImageMetadata } from "~types/data";
+import { getImageDominantColor, getProminentColorFromSVG } from "~utils/getImageDominantColor";
+import path from "path";
+import type { HexColor } from "~types/colors";
+// import asd from "../../assets/skills/css.svg";
 
-// const [about] = Object.values(import.meta.glob("~markdown/about-me.md", { eager: true }));
+// Get about me text
 const { Content: AboutMeContent } = await import("~markdown/about-me.md");
+
+// Get list of skills
+const skillsFiles = import.meta.glob<ImageMetadata>("~assets/skills/*.{svg,png}", { eager: true });
+const skills: SkillsType[] = [];
+
+// Skills image path
+const skillsPath = path.resolve(process.cwd(), "src/assets/skills"); // get skills folder -> project root + skills folder
+
+for (const image of Object.values(skillsFiles)) {
+    // Get full filename with all the arguments
+    let fullFileName = image.default.src.split("/").pop(); // Gets last part of path
+    if (!fullFileName) return;
+
+    // Remove arguments
+    fullFileName = fullFileName.split("?")[0];
+    // Get file name without extension
+    const fileName = fullFileName.split(".")[0];
+
+    // Get image dominant color
+    let color: HexColor;
+    if (path.extname(fullFileName) === ".svg") {
+        color = getProminentColorFromSVG(path.join(skillsPath, fullFileName)) as HexColor;
+    } else {
+        color = await getImageDominantColor(path.join(skillsPath, fullFileName));
+    }
+
+    skills.push({
+        src: image.default,
+        name: fileName,
+        color: color,
+    });
+}
 ---
 
 <InfoPage>
+    <!-- Metadata head -->
     <div slot="head">
         <SEO
             title="Skrazzo - Full-Stack Developer"
@@ -24,7 +63,8 @@ const { Content: AboutMeContent } = await import("~markdown/about-me.md");
         />
     </div>
 
-    <GlassContainer className="mt-[60px]">
+    <!-- About me -->
+    <GlassContainer className="md:mt-[60px]">
         <h1 slot="title" class="text-gradient title-gradient-left">About me</h1>
         <main class="flex max-md:flex-col gap-12 mt-6">
             <Picture
@@ -36,6 +76,31 @@ const { Content: AboutMeContent } = await import("~markdown/about-me.md");
                 <AboutMeContent />
             </div>
         </main>
+    </GlassContainer>
+
+    <!-- Arrow down -->
+    <div class="text-dimmed flex justify-center max-md:hidden mt-8">
+        <Icon class="animate-bounce-slow" name={"chevronDown"} stroke-width={2} width={54} height={54} />
+    </div>
+
+    <!-- My skills -->
+    <GlassContainer className="mt-[80px] md:mt-[520px]">
+        <h3 slot="title" class="text-gradient title-gradient-left">My Skills</h3>
+        <div class="flex justify-center items-center flex-wrap mt-6 md:mt-10 gap-6 md:gap-12">
+            {
+                skills.map((skill) => (
+                    <div class="skill-item">
+                        <span style={{ backgroundColor: skill.color }}>{skill.name}</span>
+                        <Picture
+                            class={"w-[56px] h-[56px] md:w-[96px] md:h-[96px]"}
+                            loading={"lazy"}
+                            src={skill.src}
+                            alt={`${skill.name} logo`}
+                        />
+                    </div>
+                ))
+            }
+        </div>
     </GlassContainer>
 </InfoPage>
 
@@ -54,6 +119,42 @@ const { Content: AboutMeContent } = await import("~markdown/about-me.md");
         h2 {
             font-size: clamp(var(--text-mobile-lg), 6vw, var(--text-lg));
             font-weight: 600;
+        }
+    }
+
+    .skill-item {
+        display: grid;
+        place-items: center;
+        position: relative;
+        transition: all 250ms ease;
+
+        span {
+            color: var(--text);
+            font-size: clamp(var(--text-mobile-sm), 3vw, var(--text-sm));
+            font-weight: 700;
+            white-space: nowrap;
+
+            padding: 4px 8px;
+            border-radius: 8px;
+
+            position: absolute;
+            top: 0;
+            opacity: 0;
+            scale: 0.8;
+
+            background-color: rgb(34, 97, 139);
+            transition: all 250ms ease;
+        }
+
+        &:hover {
+            transform: translateY(-5%);
+            scale: 1.05;
+
+            span {
+                transform: translateY(-125%);
+                opacity: 1;
+                scale: 1;
+            }
         }
     }
 </style>

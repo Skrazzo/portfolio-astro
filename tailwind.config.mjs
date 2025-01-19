@@ -37,6 +37,9 @@ export default {
                 xl: "1280px",
                 "2xl": "1536px",
             },
+            animation: {
+                "bounce-slow": "bounce 3s linear infinite",
+            },
         },
     },
     plugins: [],

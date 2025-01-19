@@ -14,11 +14,12 @@
         "astro-icon": "^1.1.5",
         "astro-seo": "^0.8.4",
         "javascript-color-gradient": "^2.5.0",
+        "node-vibrant": "^4.0.3",
         "tailwindcss": "^3.4.17"
     },
     "devDependencies": {
-        "prettier": "^3.4.2",
         "@types/javascript-color-gradient": "^2.4.2",
+        "prettier": "^3.4.2",
         "prettier-plugin-astro": "^0.14.1"
     }
 }

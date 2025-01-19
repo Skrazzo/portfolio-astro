@@ -5,7 +5,7 @@
     "compilerOptions": {
         "baseUrl": "src",
         "paths": {
-            "~types/*": ["types/index.ts"],
+            "~types/*": ["types/*"],
             "~assets/*": ["assets/*"],
             "~styles/*": ["styles/*"],
             "~pages/*": ["pages/*"],
