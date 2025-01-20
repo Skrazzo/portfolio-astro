@@ -10,7 +10,7 @@ const feedbacks = defineCollection({
     schema: z.object({
         fromName: z.string(),
         stars: z.number(),
-        fullFeedbackLink: z.string(),
+        fullFeedbackLink: z.string().optional(),
 
         // type: z.enum(["Space Probe", "Mars Rover", "Comet Lander"]),
         // launch_date: z.date(),

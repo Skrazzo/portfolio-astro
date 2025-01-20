@@ -12,7 +12,7 @@ const { title }: Props = Astro.props;
 // Cirlces
 import GradientCircle from "~components/GradientCircle.astro";
 import Gradient from "javascript-color-gradient";
-import type { HexColor } from "types";
+import type { HexColor } from "~types/colors";
 import Waves from "~components/Waves.astro";
 
 // Define gradient startColor and endColor, and circleEndColor
@@ -62,7 +62,7 @@ gradientArray = gradientArray.reverse();
 
         <!-- Phone waves -->
         <div class="fixed bottom-0 w-screen md:hidden">
-            <div class="w-full h-full absolute backdrop-blur-sm bg-background-opacity"></div>
+            <div class="w-full h-full absolute backdrop-blur-sm bg-background-opacity-80"></div>
             <Waves className="w-full" />
         </div>
 

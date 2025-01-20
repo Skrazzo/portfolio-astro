@@ -13,8 +13,8 @@ const data = entry.data;
 const { Content } = await render(entry);
 ---
 
-<div class="flex gap-3">
-    <Icon class="toggleFeedback text-dimmed -rotate-90 w-[54px] h-[54px]" name={"chevronDown"} />
+<div class="feedback-row flex gap-3 duration-300 ease-out px-4 py-6 rounded-xl -mx-4 cursor-pointer">
+    <Icon class="toggleFeedback text-dimmed -rotate-90 w-[54px] h-[54px] duration-300 ease-out" name={"chevronDown"} />
     <div class="toggleFeedback w-full relative -top-2">
         <div class="flex justify-between">
             <!-- Person name -->
@@ -41,8 +41,23 @@ const { Content } = await render(entry);
             </div>
         </div>
         <!-- Feedback -->
-        <div class="feedback-container text-gradient title-gradient-left">
+        <div class="message-container overflow-hidden transition-all duration-500 ease-out max-h-8 line-clamp-1">
             <Content />
+
+            {
+                data.fullFeedbackLink && (
+                    <div>
+                        <a
+                            target="_blank"
+                            href={data.fullFeedbackLink}
+                            class="flex items-center gap-3 mt-6 bg-panel-background border-2 border-panel-border max-w-fit p-3 rounded-md"
+                        >
+                            <Icon class="w-8 h-8 text-dimmed" name={"textFile"} />
+                            <span class="text-light tracking-tighter">Full version</span>
+                        </a>
+                    </div>
+                )
+            }
         </div>
     </div>
 </div>
@@ -52,11 +67,15 @@ const { Content } = await render(entry);
         font-size: var(--text-sm);
     }
 
-    .feedback-container {
+    .message-container {
+        color: var(--text-dimmed);
         font-size: var(--text-sm);
+
+        transition: all 250ms ease;
     }
 
-    .feedback-container-open {
+    .message-container-open {
+        color: var(--text);
     }
 </style>
 
@@ -64,10 +83,38 @@ const { Content } = await render(entry);
     const toggles = document.querySelectorAll(".toggleFeedback");
     toggles.forEach((toggle) => {
         toggle.addEventListener("click", () => {
+            // Toggle chevron rotation, and color change
+            const chevron = document.querySelector("svg.toggleFeedback");
+            if (chevron) {
+                chevron.classList.toggle("-rotate-90");
+                chevron.classList.toggle("text-light");
+                chevron.classList.toggle("text-dimmed");
+            }
+
+            // Toggle background color
+            const feedbackRow = document.querySelector(".feedback-row");
+            if (feedbackRow) {
+                feedbackRow.classList.toggle("bg-background-opacity-15");
+            }
+
             // Toggle open
-            const container = document.querySelector(".feedback-container");
+            const container = document.querySelector(".message-container");
             if (container) {
-                container.classList.toggle("line-clamp-1");
+                container.classList.toggle("max-h-8");
+                container.classList.toggle("max-h-96");
+
+                container.classList.toggle("message-container-open");
+
+                const lineClamp: string = "line-clamp-1";
+                // Animate line-clamp correctly
+                if (container.classList.contains(lineClamp)) {
+                    // If description is one line already
+                    container.classList.remove(lineClamp);
+                } else {
+                    setTimeout(() => {
+                        container.classList.add(lineClamp);
+                    }, 400);
+                }
             }
         });
     });
