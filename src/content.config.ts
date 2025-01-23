@@ -11,15 +11,21 @@ const feedbacks = defineCollection({
         fromName: z.string(),
         stars: z.number(),
         fullFeedbackLink: z.string().nullable(),
-
-        // type: z.enum(["Space Probe", "Mars Rover", "Comet Lander"]),
-        // launch_date: z.date(),
-        // status: z.enum(["Active", "Inactive", "Decommissioned"]),
-        // destination: z.string(),
-        // operator: z.string(),
-        // notable_discoveries: z.array(z.string()),
     }),
 });
 
+const projects = defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/assets/projects" }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            image: image(),
+            github: z.string().nullable(),
+            website: z.string().nullable(),
+            video: z.string().nullable(),
+            order: z.number().default(0), // Optional: for custom sorting
+        }),
+});
+
 // 4. export collections
-export const collections = { feedbacks };
+export const collections = { feedbacks, projects };
