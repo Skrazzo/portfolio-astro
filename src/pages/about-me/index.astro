@@ -87,31 +87,35 @@ const feedbackCollection = (await getCollection("feedbacks")) as CollectionEntry
     </div>
 
     <!-- My skills -->
-    <GlassContainer className="mt-[80px] md:mt-[120px] mb-[120px]">
-        <h3 slot="title" class="text-gradient title-gradient-left">My Skills</h3>
-        <div class="flex justify-center items-center flex-wrap mt-6 md:mt-8 gap-6 md:gap-12">
-            {
-                skills.map((skill) => (
-                    <div class="skill-item">
-                        <span style={{ backgroundColor: skill.color }}>{skill.name}</span>
+    <div class="min-h-screen grid place-content-center py-[80px]">
+        <GlassContainer className="w-full">
+            <h3 slot="title" class="text-gradient title-gradient-left">My Skills</h3>
+            <div class="flex justify-center items-center flex-wrap mt-6 md:mt-8 gap-6 md:gap-12">
+                {
+                    skills.map((skill) => (
+                        <div class="skill-item">
+                            <span style={{ backgroundColor: skill.color }}>{skill.name}</span>
 
-                        <Image
-                            class={"w-[56px] h-[56px] md:w-[96px] md:h-[96px]"}
-                            loading={"lazy"}
-                            src={skill.src}
-                            alt={`${skill.name} logo`}
-                        />
-                    </div>
-                ))
-            }
-        </div>
-    </GlassContainer>
+                            <Image
+                                class={"w-[56px] h-[56px] md:w-[96px] md:h-[96px]"}
+                                loading={"lazy"}
+                                src={skill.src}
+                                alt={`${skill.name} logo`}
+                            />
+                        </div>
+                    ))
+                }
+            </div>
+        </GlassContainer>
+    </div>
 
     <!-- Feedbacks -->
-    <GlassContainer className="mt-[80px] md:mt-[220px] mb-[120px]">
-        <h4 slot="title" class="text-gradient title-gradient-left">Feedbacks</h4>
-        {feedbackCollection.map((feedback) => <Feedback entry={feedback} />)}
-    </GlassContainer>
+    <div class="min-h-screen grid place-content-center py-[80px]">
+        <GlassContainer>
+            <h4 slot="title" class="text-gradient title-gradient-left mb-4">Feedbacks</h4>
+            {feedbackCollection.map((feedback) => <Feedback entry={feedback} />)}
+        </GlassContainer>
+    </div>
 </InfoPage>
 
 <style>

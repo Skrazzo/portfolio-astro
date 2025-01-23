@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
-import { getEntry, render } from "astro:content";
+import { render } from "astro:content";
 
 interface Props {
     entry: CollectionEntry<"feedbacks">;
@@ -15,19 +15,25 @@ const { Content } = await render(entry);
 let containerID = Math.random().toString(36).substring(7);
 ---
 
-<div id={containerID} class="flex gap-3 duration-300 ease-out px-4 py-6 rounded-xl -mx-4 cursor-pointer">
-    <Icon class="toggleFeedback text-dimmed -rotate-90 w-[54px] h-[54px] duration-300 ease-out" name={"chevronDown"} />
+<div
+    id={containerID}
+    class="flex gap-[6px] md:gap-3 duration-300 ease-out px-2 py-3 md:px-4 md:py-6 rounded-xl -mx-4 cursor-pointer"
+>
+    <Icon
+        class="toggleFeedback text-dimmed -rotate-90 w-[30px] h-[30px] md:w-[54px] md:h-[54px] duration-300 ease-out"
+        name={"chevronDown"}
+    />
     <div class="toggleFeedback w-full relative -top-2">
         <div class="flex justify-between">
             <!-- Person name -->
             <h4 class="text-light tracking-tight">{data.fromName}</h4>
             <!-- Feedback stars -->
-            <div class="flex gap-3">
+            <div class="flex gap-1 md:gap-3">
                 {
                     () => {
                         const stars = new Array(data.stars).fill(null);
                         const emptyStars = new Array(5 - data.stars).fill(null);
-                        const starClass = "w-[32px] h-[32px]";
+                        const starClass = "w-[20px] h-[20px] md:w-[32px] md:h-[32px]";
                         return (
                             <>
                                 {stars.map(() => (
@@ -43,21 +49,21 @@ let containerID = Math.random().toString(36).substring(7);
             </div>
         </div>
         <!-- Feedback -->
-        <div class="message-container overflow-hidden transition-all duration-500 ease-out max-h-8 line-clamp-1">
+        <div
+            class="message-container overflow-hidden transition-all duration-500 ease-out max-h-6 md:max-h-8 line-clamp-1 text-dimmed"
+        >
             <Content />
 
             {
                 data.fullFeedbackLink && (
-                    <div>
-                        <a
-                            target="_blank"
-                            href={data.fullFeedbackLink}
-                            class="flex items-center gap-3 mt-6 bg-panel-background border-2 border-panel-border max-w-fit p-3 rounded-md"
-                        >
-                            <Icon class="w-8 h-8 text-dimmed" name={"textFile"} />
-                            <span class="text-light tracking-tighter">Full version</span>
-                        </a>
-                    </div>
+                    <a
+                        target="_blank"
+                        href={data.fullFeedbackLink}
+                        class="button flex items-center gap-1 md:gap-3 mt-3 md:mt-6 max-md:ml-auto bg-panel-background border md:border-2 border-panel-border max-w-fit p-2 md:p-3 rounded-md"
+                    >
+                        <Icon class="w-[22px] h-[22px] md:w-8 md:h-8 text-dimmed" name={"textFile"} />
+                        <span class="text-light tracking-tighter">Full version</span>
+                    </a>
                 )
             }
         </div>
@@ -65,23 +71,46 @@ let containerID = Math.random().toString(36).substring(7);
 </div>
 
 <style>
+    button span {
+        font-size: clamp(var(--text-mobile-sm), 2vw, var(--text-sm));
+    }
+
     h4 {
-        font-size: var(--text-sm);
+        font-size: clamp(var(--text-mobile-sm), 3vw, var(--text-sm));
     }
 
     .message-container {
-        color: var(--text-dimmed);
-        font-size: var(--text-sm);
+        font-size: clamp(var(--text-mobile-sm), 2vw, var(--text-sm));
 
         transition: all 250ms ease;
-    }
-
-    .message-container-open {
-        color: var(--text);
     }
 </style>
 
 <script define:vars={{ id: containerID }}>
+    const toggleClassArray = (element, classes) => {
+        if (!element) return;
+        if (!classes) return;
+
+        let toggleClasses;
+        if (!Array.isArray(classes)) {
+            // Convert from string to array
+            toggleClasses = classes
+                .toString()
+                .split(" ")
+                .map((className) => className.trim())
+                .filter((className) => className !== "");
+        } else {
+            // Clean array
+            toggleClasses = classes
+                .map((className) => className.toString().trim())
+                .filter((className) => className !== "");
+        }
+
+        toggleClasses.forEach((className) => {
+            element.classList.toggle(className);
+        });
+    };
+
     const main = document.getElementById(id);
     if (!main) return;
 
@@ -92,33 +121,28 @@ let containerID = Math.random().toString(36).substring(7);
             const chevron = main.querySelector("svg.toggleFeedback");
 
             if (chevron) {
-                chevron.classList.toggle("-rotate-90");
-                chevron.classList.toggle("text-light");
-                chevron.classList.toggle("text-dimmed");
+                toggleClassArray(chevron, ["-rotate-90", "text-light", "text-dimmed"]);
             }
 
             // Toggle background color
-
             if (main) {
-                main.classList.toggle("bg-background-opacity-15");
+                toggleClassArray(main, ["bg-background-opacity-15", "mt-4"]);
             }
 
             // Toggle open
-            const container = main.querySelector(".message-container");
-            if (container) {
-                container.classList.toggle("max-h-8");
-                container.classList.toggle("max-h-96");
-
-                container.classList.toggle("message-container-open");
+            const msgContainer = main.querySelector(".message-container");
+            if (msgContainer) {
+                // toggle classses for message container
+                toggleClassArray(msgContainer, "max-h-6 md:max-h-8 max-h-[450px] text-light pt-2");
 
                 const lineClamp = "line-clamp-1";
                 // Animate line-clamp correctly
-                if (container.classList.contains(lineClamp)) {
+                if (msgContainer.classList.contains(lineClamp)) {
                     // If description is one line already
-                    container.classList.remove(lineClamp);
+                    msgContainer.classList.remove(lineClamp);
                 } else {
                     setTimeout(() => {
-                        container.classList.add(lineClamp);
+                        msgContainer.classList.add(lineClamp);
                     }, 400);
                 }
             }
