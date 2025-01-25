@@ -1,8 +1,8 @@
 ---
 title: "Picuss - photo gallery"
 image: "./picuss.png"
-github: "https://github.com/yourusername/picuss"
-website: "https://picuss.example.com"
+github: "https://github.com/Skrazzo/picuss"
+website: "https://picuss.skrazzo.xyz"
 video:
 order: 1
 ---
