@@ -48,7 +48,7 @@ const { title, image, github, website, video } = project.data;
             {
                 video ? (
                     <video
-                        class="w-full rounded-lg border-2 border-panel-border"
+                        class="w-full rounded-lg border-2 border-light"
                         controls
                         poster={image.src}
                         transition:name={title}
@@ -60,7 +60,7 @@ const { title, image, github, website, video } = project.data;
                     <Image
                         src={image}
                         alt={title}
-                        class="w-full rounded-lg border-2 border-panel-border"
+                        class="w-full rounded-lg border-2 border-light"
                         transition:name={title}
                     />
                 )

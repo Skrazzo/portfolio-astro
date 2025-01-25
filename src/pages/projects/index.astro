@@ -41,7 +41,7 @@ const projectsWithContent = await Promise.all(
             {
                 projectsWithContent.map(({ Content, data, id }) => (
                     <a href={`/projects/${id}`} class="group">
-                        <div class="rounded-lg overflow-hidden flex flex-col sm:flex-row gap-6 p-4 -mx-4 transition-all duration-300 hover:bg-background-opacity-15">
+                        <div class="rounded-lg overflow-hidden flex flex-col sm:flex-row gap-6 p-4 -mx-4 transition-all duration-300 hover:bg-background-opacity-25">
                             <Image
                                 src={data.image}
                                 alt={data.title}

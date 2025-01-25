@@ -11,6 +11,12 @@
     "dependencies": {
         "@astrojs/react": "^4.1.6",
         "@astrojs/tailwind": "^5.1.4",
+        "@emailjs/browser": "^4.4.1",
+        "@tiptap/extension-color": "^2.11.3",
+        "@tiptap/extension-link": "^2.11.3",
+        "@tiptap/extension-text-style": "^2.11.3",
+        "@tiptap/react": "^2.11.3",
+        "@tiptap/starter-kit": "^2.11.3",
         "@types/react": "^19.0.8",
         "@types/react-dom": "^19.0.3",
         "astro": "^5.0.9",
@@ -19,6 +25,7 @@
         "javascript-color-gradient": "^2.5.0",
         "node-vibrant": "^4.0.3",
         "react": "^19.0.0",
+        "react-confetti": "^6.2.2",
         "react-dom": "^19.0.0",
         "tailwindcss": "^3.4.17"
     },

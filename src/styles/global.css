@@ -1,7 +1,7 @@
 :root {
     /* colors */
     --background: #000113;
-    --background-opacity-15: #00011325;
+    --background-opacity-25: #00011325;
     --background-opacity-80: #00011380;
     --text: #e5e7f2;
     --text-dimmed: #a5a8b9;
@@ -25,6 +25,7 @@
     /* for panels */
     --panel-background: #e5e7f207;
     --panel-border: #e5e7f210;
+    --panel-border-dimmer: #e5e7f205;
 
     /* Main page */
     --padding-y: 44px;
@@ -66,5 +67,13 @@
     :root {
         --padding-y: 44px;
         --padding-x: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --panel-background: #e5e7f210;
+        --panel-border: #e5e7f210;
+        --panel-border-dimmer: #e5e7f205;
     }
 }
