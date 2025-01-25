@@ -3,7 +3,7 @@ title: "Picuss - photo gallery"
 image: "./picuss.png"
 github: "https://github.com/Skrazzo/picuss"
 website: "https://picuss.skrazzo.xyz"
-video:
+video: https://seafile.skrazzo.xyz/f/d81f19c05e1c471f8914/?dl=1
 order: 1
 ---
 

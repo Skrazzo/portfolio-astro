@@ -4,7 +4,7 @@ import InfoPage from "~layouts/InfoPage.astro";
 import GlassContainer from "~components/GlassContainer.astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection, render } from "astro:content";
-import { Image, Picture } from "astro:assets";
+import { Image } from "astro:assets";
 
 const projects = (await getCollection("projects")) as CollectionEntry<"projects">[];
 const sortedProjects = projects.sort((a, b) => (a.data.order || 0) - (b.data.order || 0)); // Sort projects by their order
@@ -34,7 +34,7 @@ const projectsWithContent = await Promise.all(
         />
     </div>
 
-    <GlassContainer className="my-[80px]">
+    <GlassContainer className="mb-[80px] md:mt-[80px]">
         <h1 slot="title" class="text-gradient title-gradient-left">Projects</h1>
 
         <main class="flex flex-col mt-4">
@@ -46,6 +46,7 @@ const projectsWithContent = await Promise.all(
                                 src={data.image}
                                 alt={data.title}
                                 class="object-cover rounded-md sm:w-[300px] border-2 border-text-light"
+                                transition:name={data.title}
                             />
 
                             <div class="flex-1 flex flex-col justify-between">

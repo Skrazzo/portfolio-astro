@@ -3,7 +3,7 @@ title: "Ruckas muiža"
 image: "./ruckasmuiza.jpeg"
 github: "https://github.com/jkrigerts/ruckasmuiza/"
 website: "https://www.ruckasmuiza.lv/"
-video:
+video: https://seafile.skrazzo.xyz/f/2d22037d46374f27863f/?dl=1
 order: 2
 ---
 

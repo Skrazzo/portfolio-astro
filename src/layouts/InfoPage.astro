@@ -2,6 +2,7 @@
 import "~styles/global.css";
 import Header from "~components/Header/Header.astro";
 import Drawer from "~components/Header/Drawer.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
     title?: string;
@@ -35,6 +36,7 @@ gradientArray = gradientArray.reverse();
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {title && <title>{title}</title>}
         <slot name="head" />
+        <ClientRouter />
     </head>
     <body class="bg-background">
         <!-- Navigation bar -->
