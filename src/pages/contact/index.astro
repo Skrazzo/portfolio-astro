@@ -1,0 +1,20 @@
+---
+import { SEO } from "astro-seo";
+import GlassContainer from "~components/GlassContainer.astro";
+import ContactForm from "~components/react/ContactForm";
+import InfoPage from "~layouts/InfoPage.astro";
+---
+
+<InfoPage>
+    <div slot="head">
+        <SEO
+            title="Skrazzo - Contact"
+            description="Get in touch with me through my contact page. Find my email, social media links, and other ways to connect and collaborate."
+        />
+    </div>
+
+    <GlassContainer className="mb-[80px] md:mt-[80px]">
+        <h1 slot="title" class="text-gradient title-gradient-left">Contact me</h1>
+        <ContactForm client:load />
+    </GlassContainer>
+</InfoPage>

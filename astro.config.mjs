@@ -5,6 +5,8 @@ import tailwind from "@astrojs/tailwind";
 
 import icon from "astro-icon";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 // TODO: Add sitemap maybe
 export default defineConfig({
@@ -12,5 +14,5 @@ export default defineConfig({
         enabled: false,
     },
 
-    integrations: [tailwind(), icon()],
+    integrations: [tailwind(), icon(), react()],
 });
