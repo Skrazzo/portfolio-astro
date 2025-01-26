@@ -2,9 +2,10 @@
 interface Props {
     name: string;
     href: string;
+    ariaLabel: string;
 }
 
-const { name, href } = Astro.props;
+const { name, href, ariaLabel } = Astro.props;
 
 // Get current link and understand if this page is active or not
 const active = Astro.url.pathname.includes(href);
@@ -13,8 +14,11 @@ const active = Astro.url.pathname.includes(href);
 <a
     class="px-0 md:px-4 font-semibold border-2 border-transparent decoration-transparent w-fit"
     class:list={["text-dimmed", "text-md", { active }]}
-    href={href}>{name}</a
+    href={href}
+    aria-label={ariaLabel}
 >
+    {name}
+</a>
 
 <style>
     a {

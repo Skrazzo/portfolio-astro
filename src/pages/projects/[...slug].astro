@@ -26,20 +26,35 @@ const { Content } = await render(project);
 // Extract project data
 const { title, image, github, website, video } = project.data;
 
-// TODO: Finish this creating basic SEO
-// openGraph={{
-//                 basic: {
-//                     title: `Skrazzo - ${title}`,
-//                     type: "Website",
-//                     image: 'needs to be src',
-//                 },
-//             }}
+let metaDescription = `Explore ${title} - A project by Leons, showcasing innovative web development solutions and technical expertise.`;
+if (project.body) {
+    // Generate description from markdown
+    metaDescription = project.body.slice(0, 160);
+}
 ---
 
 <InfoPage>
-    <div slot="head">
-        <SEO title={`Skrazzo - ${title}`} description={title} />
-    </div>
+    <SEO
+        slot="head"
+        title={`Leons - ${title}`}
+        description={metaDescription}
+        openGraph={{
+            basic: {
+                title: `Leons - ${title}`,
+                type: "article",
+                image: image.src,
+            },
+            image: {
+                alt: `Preview of ${title} project`,
+            },
+        }}
+        extend={{
+            meta: [
+                { name: "author", content: "Leons" },
+                { name: "keywords", content: `web development, ${title}, portfolio project, Leons, programming` },
+            ],
+        }}
+    />
 
     <GlassContainer className="mb-[80px]" transition:animate="slide">
         <h1 slot="title" class="text-gradient title-gradient-left text-center" transition:name="title">{title}</h1>

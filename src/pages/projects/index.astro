@@ -20,19 +20,33 @@ const projectsWithContent = await Promise.all(
 
 <InfoPage>
     <!-- Metadata head -->
-    <div slot="head">
-        <SEO
-            title="Skrazzo - Projects"
-            description="Explore Skrazzo's curated portfolio of projects, showcasing unique creations like Picuss, Ruckas Muiza, and Coffee Time. Dive into innovative ideas, collaborative efforts, and creative designs that highlight full-stack development expertise."
-            openGraph={{
-                basic: {
-                    title: "Skrazzo - Projects",
-                    type: "Website",
-                    image: "/projects-preview.webp",
+
+    <SEO
+        slot="head"
+        title="Leons - Projects"
+        description="Explore Leons's curated portfolio of projects, showcasing unique creations like Picuss, Ruckas Muiza, and Coffee Time. Dive into innovative ideas, collaborative efforts, and creative designs that highlight full-stack development expertise."
+        openGraph={{
+            basic: {
+                title: "Leons - Projects",
+                type: "Website",
+                image: "projects-preview.webp",
+            },
+        }}
+        extend={{
+            meta: [
+                {
+                    name: "keywords",
+                    content:
+                        "web development, full-stack development, software engineering, projects, portfolio, Skrazzo, Leons, web applications, programming",
                 },
-            }}
-        />
-    </div>
+                { name: "author", content: "Leons" },
+                { name: "robots", content: "index, follow" },
+                { name: "language", content: "English" },
+                { name: "revisit-after", content: "7 days" },
+                { name: "theme-color", content: "#000000" },
+            ],
+        }}
+    />
 
     <GlassContainer className="mb-[80px] md:mt-[80px]">
         <h1 slot="title" class="text-gradient title-gradient-left">Projects</h1>
@@ -40,7 +54,7 @@ const projectsWithContent = await Promise.all(
         <main class="flex flex-col mt-4">
             {
                 projectsWithContent.map(({ Content, data, id }) => (
-                    <a href={`/projects/${id}`} class="group">
+                    <a href={`projects/${id}`} class="group">
                         <div class="rounded-lg overflow-hidden flex flex-col sm:flex-row gap-6 p-4 -mx-4 transition-all duration-300 hover:bg-background-opacity-25">
                             <Image
                                 src={data.image}

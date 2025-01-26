@@ -25,7 +25,7 @@ import HeaderLink from "./HeaderLink.astro";
     <div class="flex items-center gap-3">
         <h2
             class="text-gradient font-bold title-gradient-down uppercase cursor-pointer"
-            onclick="window.location.href='/'"
+            onclick="window.location.href=''"
         >
             skrazzo.xyz
         </h2>
@@ -36,9 +36,9 @@ import HeaderLink from "./HeaderLink.astro";
     <nav
         class="max-md:mt-8 max-md:flex-col max-md:w-full hidden gap-4 md:flex md:items-center md:gap-2 md:text-center lg:gap-8"
     >
-        <HeaderLink name="About me" href="/about-me" />
-        <HeaderLink name="My projects" href="/projects" />
-        <HeaderLink name="Contact me" href="/contact" />
+        <HeaderLink ariaLabel="Learn more about me" name="About me" href="about-me" />
+        <HeaderLink ariaLabel="My best projects" name="My projects" href="projects" />
+        <HeaderLink ariaLabel="Contact me via form or other links" name="Contact me" href="contact" />
     </nav>
 </header>
 

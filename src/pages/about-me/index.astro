@@ -52,19 +52,30 @@ const feedbackCollection = (await getCollection("feedbacks")) as CollectionEntry
 
 <InfoPage>
     <!-- Metadata head -->
-    <div slot="head">
-        <SEO
-            title="Skrazzo - Full-Stack Developer"
-            description="Discover the journey of Skrazzo, a passionate full-stack developer with a love for technology and gaming. Learn about my early interest in scripting, my transition to web development, and my current expertise in full-stack development."
-            openGraph={{
-                basic: {
-                    title: "Skrazzo - Full-Stack Developer",
-                    type: "Website",
-                    image: "/me.png",
+    <SEO
+        slot={"head"}
+        title="About Leons - Full-Stack Developer & Tech Enthusiast"
+        description="Discover the journey of Leons, a passionate full-stack developer with a love for technology and gaming. Learn about my early interest in scripting, my transition to web development, and my current expertise in full-stack development."
+        openGraph={{
+            basic: {
+                title: "About leons - Full-Stack Developer & Tech Enthusiast",
+                type: "profile",
+                image: "me.png",
+            },
+            image: {
+                alt: "Leons - Full Stack Developer",
+            },
+        }}
+        extend={{
+            meta: [
+                {
+                    name: "keywords",
+                    content: "full-stack developer, web development, programming, technology, software engineer",
                 },
-            }}
-        />
-    </div>
+                { name: "author", content: "Leons Aleksandrovs" },
+            ],
+        }}
+    />
 
     <!-- About me -->
     <GlassContainer className="md:mt-[80px]">
@@ -73,6 +84,7 @@ const feedbackCollection = (await getCollection("feedbacks")) as CollectionEntry
             <Image
                 class="border-[3px] border-[#DAD5E2] bg-panel-border rounded-xl max-md:object-top max-sm:h-[300px] max-md:h-[520px] md:w-[320px] lg:w-[384px] opacity-80 aspect-[0.8/1] object-cover"
                 src={MePicture}
+                loading={"eager"}
                 alt={"Me sitting on railroads"}
             />
             <div class="text-light about-me-content">

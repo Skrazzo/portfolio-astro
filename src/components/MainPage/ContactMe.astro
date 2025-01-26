@@ -1,7 +1,7 @@
 ---
 import GradientCircle from "~components/GradientCircle.astro";
 import Gradient from "javascript-color-gradient";
-import type { HexColor } from "types";
+import type { HexColor } from "~types/colors";
 
 // Define gradient startColor and endColor, and circleEndColor
 const circleIncreasePx: number = 175;
@@ -18,12 +18,12 @@ gradientArray = gradientArray.reverse();
 
 <div class="overflow-checker">
     <div class="contact-me-container absolute grid place-items-center max-md:hidden">
-        <button
+        <a
             class="text-md font-bold uppercase text-background hover:scale-[1.025] transition duration-300"
-            onclick="window.location.href='/contact'"
+            href="contact"
         >
             contact me
-        </button>
+        </a>
 
         <!-- Circle div components here: -->
         {
@@ -58,7 +58,7 @@ gradientArray = gradientArray.reverse();
         right: var(--padding-x);
     }
 
-    button {
+    a {
         padding: 26px 56px;
         border-radius: 96px;
         background: linear-gradient(125deg, var(--text), var(--accent-light));

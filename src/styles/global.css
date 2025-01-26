@@ -36,11 +36,12 @@
 
 @font-face {
     font-family: SourceCodePro;
-    src: url("/fonts/SourceCodePro.ttf") format("truetype");
+    src: url("fonts/SourceCodePro.ttf") format("truetype");
+    font-display: swap; /* Ensures text is visible while the font loads */
 }
 
 * {
-    font-family: SourceCodePro;
+    font-family: SourceCodePro, Consolas, Menlo, Monaco, "Courier New", monospace;
 }
 
 /* Text gradients */

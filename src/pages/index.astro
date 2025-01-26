@@ -4,9 +4,23 @@ import Header from "~components/Header/Header.astro";
 import Introduction from "~components/MainPage/Introduction.astro";
 import ContactMe from "~components/MainPage/ContactMe.astro";
 import Waves from "~components/Waves.astro";
+import { SEO } from "astro-seo";
 ---
 
 <Blank>
+    <SEO
+        slot={"head"}
+        title="Leons Aleksandrovs - Full-Stack Developer"
+        description="Welcome to Skrazzo's portfolio - a passionate full-stack developer crafting innovative web solutions. Explore my projects and expertise in modern web development."
+        openGraph={{
+            basic: {
+                title: "Leons Aleksandrovs - Full-Stack Developer",
+                type: "website",
+                image: "main-preview.webp",
+            },
+        }}
+    />
+
     <!-- For pc and mobile view -->
     <Header iconName="menu" showBurger={true} />
     <!-- For pc and mobile view -->
@@ -15,7 +29,7 @@ import Waves from "~components/Waves.astro";
     <div class="md:hidden text-light mt-14 ml-[var(--padding-x)]">
         <a
             class="contact-me rounded-full py-4 px-7 bg-white text-background uppercase font-bold text-mobile-lg"
-            href="/contact">contact me</a
+            href="contact">contact me</a
         >
     </div>
 
