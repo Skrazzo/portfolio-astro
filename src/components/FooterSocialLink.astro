@@ -1,0 +1,18 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    iconName: string;
+    href: string;
+}
+
+const props = Astro.props;
+---
+
+<a
+    href={props.href}
+    target="_blank"
+    class="md:bg-panel-background md:border md:border-panel-border hover:border-panel-border-lighter duration-150 h-[34px] md:h-[59px] grid place-items-center aspect-square rounded-md text-dimmer md:text-light"
+>
+    <Icon name={props.iconName} class={"w-[35px] h-[35px]"} />
+</a>

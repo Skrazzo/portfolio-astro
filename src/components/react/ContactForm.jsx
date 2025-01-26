@@ -161,6 +161,7 @@ export default function ContactForm() {
                     slotBefore={<MenuBar emailRef={emailRef} runConfetti={runConfetti} setSending={setSending} />}
                     extensions={extensions}
                     content={content}
+                    immediatelyRender={false}
                 ></EditorProvider>
             </div>
         </div>

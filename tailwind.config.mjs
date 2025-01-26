@@ -14,7 +14,10 @@ export default {
                 accent: "var(--accent)",
                 "accent-light": "var(--accent-light)",
                 "panel-background": "var(--panel-background)",
+                "panel-background-dimmer": "var(--panel-background-dimmer)",
                 "panel-border": "var(--panel-border)",
+                "panel-border-lighter": "var(--panel-border-lighter)",
+                "panel-border-dimmer": "var(--panel-border-dimmer)",
             },
             fontSize: {
                 // Normal font sizes

@@ -24,8 +24,10 @@
 
     /* for panels */
     --panel-background: #e5e7f207;
+    --panel-background-dimmer: #e5e7f202;
     --panel-border: #e5e7f210;
     --panel-border-dimmer: #e5e7f205;
+    --panel-border-lighter: #e5e7f230;
 
     /* Main page */
     --padding-y: 44px;
