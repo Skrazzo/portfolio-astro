@@ -9,9 +9,21 @@ interface Props {
 
 const { className = "" }: Props = Astro.props;
 
+const isActive = (link: string[]): boolean => {
+    let active: boolean = false;
+    link.forEach((x) => {
+        if (Astro.url.pathname.includes(x)) {
+            active = true;
+        }
+    });
+
+    return active;
+};
+
 // Check if current path includes about-me
-const isAboutMe = Astro.url.pathname.includes("about-me");
-const isProjects = /projects|contact/.test(Astro.url.pathname);
+const isAboutMe = isActive(["about-me"]);
+const isProjects = isActive(["projects"]);
+const isContact = isActive(["contact"]);
 ---
 
 <footer
@@ -35,7 +47,7 @@ const isProjects = /projects|contact/.test(Astro.url.pathname);
             )
         }
         {
-            !isProjects && (
+            !isProjects && !isContact && (
                 <a class="hover:underline" href="/projects">
                     Leons - My Projects
                 </a>
@@ -43,10 +55,10 @@ const isProjects = /projects|contact/.test(Astro.url.pathname);
         }
     </div>
 
-    <div class="flex flex-col items-center gap-4 font-semibold text-light text-sm md:hidden">
-        <a href="/contact">Contact me</a>
-        <a href="/projects">My projects</a>
-        <a href="/about-me">About me</a>
+    <div class="flex flex-col items-center gap-4 font-semibold text-dimmed text-sm md:hidden">
+        <a class:list={{ "active text-light": isContact }} href="/contact">Contact me</a>
+        <a class:list={{ "active text-light": isProjects }} href="/projects">My projects</a>
+        <a class:list={{ "active text-light": isAboutMe }} href="/about-me">About me</a>
     </div>
 
     <div class="md:hidden border-t border-panel-border-lighter w-[140px]"></div>
@@ -72,5 +84,11 @@ const isProjects = /projects|contact/.test(Astro.url.pathname);
 <style>
     .sitemap-links {
         font-size: var(--text-sm);
+    }
+
+    .active {
+        text-underline-offset: 3px;
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
     }
 </style>
