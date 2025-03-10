@@ -4,12 +4,14 @@ import Header from "~components/Header/Header.astro";
 import Drawer from "~components/Header/Drawer.astro";
 import { ClientRouter } from "astro:transitions";
 import Footer from "~components/Footer.astro";
+import BackgroundImage from "~assets/background.jpeg";
 
 // Cirlces
-import GradientCircle from "~components/GradientCircle.astro";
-import Gradient from "javascript-color-gradient";
-import type { HexColor } from "~types/colors";
+// import GradientCircle from "~components/GradientCircle.astro";
+// import Gradient from "javascript-color-gradient";
+// import type { HexColor } from "~types/colors";
 import Waves from "~components/Waves.astro";
+import { Image } from "astro:assets";
 
 interface Props {
     title?: string;
@@ -19,16 +21,38 @@ interface Props {
 const { title, footerClass = "" }: Props = Astro.props;
 
 // Define gradient startColor and endColor, and circleEndColor
-const circleIncreasePx: number = 175;
-const endColor: HexColor = "#3B1C77"; // This color is used for gradient end color in a circle
+// const circleIncreasePx: number = 175;
+// const endColor: HexColor = "#3B1C77"; // This color is used for gradient end color in a circle
 
 /*
     Generate gradient colors for circles, and define circle size increase in pixels
     000113 -> dark background
     ad55e7 -> accent color
 */
-let gradientArray = new Gradient().setColorGradient("#000005", "#ad55e7").setMidpoint(10).getColors() as HexColor[];
-gradientArray = gradientArray.reverse();
+// let gradientArray = new Gradient().setColorGradient("#000005", "#ad55e7").setMidpoint(10).getColors() as HexColor[];
+// gradientArray = gradientArray.reverse();
+
+// This was left here, because it lags on firefox
+// Render circles
+// <div class="fixed w-full h-full top-0 left-0 z-[-1] max-md:hidden">
+//     <div
+//         class="w-[200px] rounded-full aspect-square bg-gray-700 absolute top-1/2 -translate-y-1/2 -translate-x-1/2 grid place-items-center"
+//     >
+//         <!-- Check for overflow, and do not allow it -->
+//         {
+//             gradientArray.map((startColor, idx) => (
+//                 <GradientCircle
+//                     w={`${circleIncreasePx * (idx + 1)}px`}
+//                     h={`${circleIncreasePx * (idx + 1)}px`}
+//                     zIndex={(idx + 1) * -1}
+//                     startColor={startColor}
+//                     endColor={endColor}
+//                     deg="-22.5deg"
+//                 />
+//             ))
+//         }
+//     </div>
+// </div>
 ---
 
 <html lang="en">
@@ -45,26 +69,8 @@ gradientArray = gradientArray.reverse();
     <body class="bg-background">
         <!-- Navigation bar -->
         <Header iconName="menu" showBurger={true} />
-        <!-- Render circles -->
-        <div class="fixed w-full h-full top-0 left-0 z-[-1] max-md:hidden">
-            <div
-                class="w-[200px] rounded-full aspect-square bg-gray-700 absolute top-1/2 -translate-y-1/2 -translate-x-1/2 grid place-items-center"
-            >
-                <!-- Check for overflow, and do not allow it -->
-                {
-                    gradientArray.map((startColor, idx) => (
-                        <GradientCircle
-                            w={`${circleIncreasePx * (idx + 1)}px`}
-                            h={`${circleIncreasePx * (idx + 1)}px`}
-                            zIndex={(idx + 1) * -1}
-                            startColor={startColor}
-                            endColor={endColor}
-                            deg="-22.5deg"
-                        />
-                    ))
-                }
-            </div>
-        </div>
+        <!-- Render circles background -->
+        <Image src={BackgroundImage} alt={"Background image"} class={"background-image"} />
 
         <!-- Phone waves -->
         <div class="fixed bottom-0 w-screen md:hidden">
