@@ -70,7 +70,12 @@ const { title, footerClass = "" }: Props = Astro.props;
         <!-- Navigation bar -->
         <Header iconName="menu" showBurger={true} />
         <!-- Render circles background -->
-        <Image src={BackgroundImage} alt={"Background image"} class={"background-image"} />
+        <Image
+            src={BackgroundImage}
+            alt={"Background image"}
+            style={{ aspectRatio: "1/0.5442964679" }}
+            class={"background-image"}
+        />
 
         <!-- Phone waves -->
         <div class="fixed bottom-0 w-screen md:hidden">

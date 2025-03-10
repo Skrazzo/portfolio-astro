@@ -71,6 +71,8 @@
     top: 0;
     z-index: -100;
     min-height: 100dvh;
+    min-width: 100dvh;
+    object-fit: cover;
 }
 
 @media (max-width: 1050px) {
@@ -85,5 +87,9 @@
         --panel-background: #e5e7f210;
         --panel-border: #e5e7f210;
         --panel-border-dimmer: #e5e7f205;
+    }
+
+    .background-image {
+        display: none;
     }
 }

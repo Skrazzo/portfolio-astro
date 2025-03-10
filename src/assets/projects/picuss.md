@@ -1,9 +1,9 @@
 ---
 title: "Picuss - photo gallery"
-image: "./picuss.png"
+image: "./picuss.webp"
 github: "https://github.com/Skrazzo/picuss"
 website: "https://picuss.skrazzo.xyz"
-video: https://seafile.skrazzo.xyz/f/d81f19c05e1c471f8914/?dl=1
+video: videos/picuss-review.mp4
 order: 1
 ---
 

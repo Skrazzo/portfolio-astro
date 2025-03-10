@@ -1,9 +1,9 @@
 ---
 title: "Ruckas muiža"
-image: "./ruckasmuiza.jpeg"
+image: "./ruckasmuiza.webp"
 github: "https://github.com/jkrigerts/ruckasmuiza/"
 website: "https://www.ruckasmuiza.lv/"
-video: https://seafile.skrazzo.xyz/f/2d22037d46374f27863f/?dl=1
+video: videos/ruckasreview.mp4
 order: 2
 ---
 
