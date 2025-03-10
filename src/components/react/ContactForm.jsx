@@ -131,7 +131,7 @@ export default function ContactForm() {
     }
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 ">
             <div className="your-email  flex items-center gap-2 rounded-md border-2 border-panel-border px-2 py-1">
                 <IconMail className="h-9 w-9 text-dimmer" />
                 <input
@@ -142,7 +142,7 @@ export default function ContactForm() {
                 />
             </div>
 
-            <div className="relative overflow-hidden rounded-md border-2 bg-panel-background  border-panel-border mt-2 ">
+            <div className="relative overflow-hidden rounded-md border-2 bg-panel-background border-panel-border mt-2 min-h-[300px]">
                 {confetti && (
                     <ReactConfetti
                         onConfettiComplete={() => setConfetti(false)}
