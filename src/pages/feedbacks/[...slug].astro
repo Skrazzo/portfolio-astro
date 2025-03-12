@@ -1,17 +1,15 @@
 ---
 import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
 import InfoPage from "~layouts/InfoPage.astro";
 import GlassContainer from "~components/GlassContainer.astro";
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
-import LinkButton from "~components/Project/LinkButton.astro";
 import { hasFileExtension } from "~utils/hasFileExtension";
+import Stars from "~components/Stars.astro";
 
 // Generate static paths for all projects
 export async function getStaticPaths() {
     const projects = await getCollection("feedbacks");
-    console.log(projects);
     return projects
         .map((project) => ({
             params: { slug: project.id },
@@ -51,26 +49,77 @@ let metaDescription = snippet;
     />
 
     <GlassContainer className="mb-[80px]" transition:animate="slide">
-        <h1 slot="title" class="text-gradient title-gradient-left text-center" transition:name="title">{fromName}</h1>
+        <div slot="title" class="w-full flex max-sm:flex-col gap-2 items-center justify-between mb-4">
+            <h4 class="text-gradient title-gradient-left" transition:name={fromName}>
+                {fromName}
+            </h4>
+            <Stars stars={stars} starTransition={`star-${fromName}`} />
+        </div>
+        <div class="text-container">
+            <Content />
+        </div>
     </GlassContainer>
 </InfoPage>
 
 <style>
-    h1 {
-        font-size: clamp(var(--text-mobile-title), 3vw, var(--text-title));
+    .text-container {
+        /* titles */
+        h2 {
+            background: -webkit-linear-gradient(180deg, var(--text-dimmed), var(--text));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            width: fit-content;
+            font-size: clamp(var(--text-mobile-lg), 3vw, var(--text-lg));
+            font-weight: 700;
+
+            margin: 1rem 0;
+        }
+
+        /* paragraphs */
+        p {
+            margin: 0.5rem 0;
+            font-size: clamp(var(--text-mobile-sm), 3vw, var(--text-sm));
+            line-height: calc(clamp(var(--text-mobile-sm), 3vw, var(--text-sm)) * 1.5);
+            letter-spacing: -0.5px;
+
+            background: -webkit-linear-gradient(180deg, var(--text-dimmed), var(--text));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* classes for under paragrahs and lists */
+        p,
+        ul {
+            margin-bottom: 2rem;
+        }
+
+        /* for last elements remove styles */
+        p:last-child,
+        ul:last-child {
+            margin-bottom: 0;
+        }
+
+        animation: fadeIn 400ms ease-in-out forwards;
     }
 
-    .links {
-        color: var(--text);
-        font-size: clamp(var(--text-mobile-lg), 2vw, var(--text-lg));
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
-    .project-description {
-        font-size: clamp(var(--text-mobile-md), 2vw, var(--text-md));
-        line-height: calc(clamp(var(--text-mobile-md), 2vw, var(--text-md)) * 1.3);
-    }
-
-    .project-description :global(p) {
-        margin-bottom: 1rem;
-    }
+    /* @media (max-width: 768px) { */
+    /*     .text-container { */
+    /*         h2 { */
+    /*             text-align: center; */
+    /*             width: 100%; */
+    /*         } */
+    /*     } */
+    /* } */
 </style>

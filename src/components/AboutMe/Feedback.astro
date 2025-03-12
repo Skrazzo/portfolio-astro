@@ -2,6 +2,8 @@
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
+import Stars from "~components/Stars.astro";
+import { hasFileExtension } from "~utils/hasFileExtension";
 
 interface Props {
     entry: CollectionEntry<"feedbacks">;
@@ -26,38 +28,21 @@ let containerID = Math.random().toString(36).substring(7);
     <div class="toggleFeedback w-full relative -top-2">
         <div class="flex justify-between">
             <!-- Person name -->
-            <h4 class="text-light tracking-tight">{data.fromName}</h4>
+            <h4 class="text-light tracking-tight" transition:name={data.fromName}>{data.fromName}</h4>
             <!-- Feedback stars -->
-            <div class="flex gap-1 md:gap-3">
-                {
-                    () => {
-                        const stars = new Array(data.stars).fill(null);
-                        const emptyStars = new Array(5 - data.stars).fill(null);
-                        const starClass = "w-[20px] h-[20px] md:w-[32px] md:h-[32px]";
-                        return (
-                            <>
-                                {stars.map(() => (
-                                    <Icon name={"star"} class={`${starClass} text-accent opacity-80`} />
-                                ))}
-                                {emptyStars.map(() => (
-                                    <Icon name={"star"} class={`${starClass} text-dimmed opacity-15`} />
-                                ))}
-                            </>
-                        );
-                    }
-                }
-            </div>
+            <Stars stars={data.stars} starTransition={`star-${data.fromName}`} />
         </div>
         <!-- Feedback -->
         <div
             class="message-container overflow-hidden transition-all duration-500 ease-out max-h-6 md:max-h-8 line-clamp-1 text-dimmed"
         >
-            <Content />
+            <!-- <Content /> -->
+            <p>{data.snippet}</p>
 
             {
                 data.fullFeedbackLink && (
                     <a
-                        target="_blank"
+                        target={hasFileExtension(data.fullFeedbackLink) ? "_blank" : "_self"}
                         href={data.fullFeedbackLink}
                         class="button flex items-center gap-1 md:gap-3 mt-3 md:mt-6 max-md:ml-auto bg-panel-background border md:border-2 border-panel-border max-w-fit p-2 md:p-3 rounded-md"
                     >
