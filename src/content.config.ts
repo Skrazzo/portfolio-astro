@@ -11,6 +11,7 @@ const feedbacks = defineCollection({
         fromName: z.string(),
         stars: z.number(),
         fullFeedbackLink: z.string().nullable(),
+        snippet: z.string(),
     }),
 });
 

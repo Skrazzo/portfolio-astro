@@ -6,102 +6,52 @@ import GlassContainer from "~components/GlassContainer.astro";
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
 import LinkButton from "~components/Project/LinkButton.astro";
+import { hasFileExtension } from "~utils/hasFileExtension";
 
 // Generate static paths for all projects
 export async function getStaticPaths() {
-    const projects = await getCollection("projects");
-    return projects.map((project) => ({
-        params: { slug: project.id },
-        props: { project },
-    }));
+    const projects = await getCollection("feedbacks");
+    console.log(projects);
+    return projects
+        .map((project) => ({
+            params: { slug: project.id },
+            props: { project },
+        }))
+        .filter((data) => !hasFileExtension(data.props.project.data.fullFeedbackLink || ""));
 }
 
 interface Props {
-    project: CollectionEntry<"projects">;
+    project: CollectionEntry<"feedbacks">;
 }
 
 const { project }: Props = Astro.props;
 const { Content } = await render(project);
 
 // Extract project data
-const { title, image, github, website, video } = project.data;
+const { fromName, stars, snippet } = project.data;
 
-let metaDescription = `Explore ${title} - A project by Leons, showcasing innovative web development solutions and technical expertise.`;
-if (project.body) {
-    // Generate description from markdown
-    metaDescription = project.body.slice(0, 160);
-}
+// Set meta description to be the snippet
+let metaDescription = snippet;
 ---
 
 <InfoPage>
     <SEO
         slot="head"
-        title={`Leons - ${title}`}
+        title={`Feedback from ${fromName}`}
         description={metaDescription}
-        openGraph={{
-            basic: {
-                title: `Leons - ${title}`,
-                type: "article",
-                image: image.src,
-            },
-            image: {
-                alt: `Preview of ${title} project`,
-            },
-        }}
         extend={{
             meta: [
-                { name: "author", content: "Leons" },
-                { name: "keywords", content: `web development, ${title}, portfolio project, Leons, programming` },
+                { name: "author", content: fromName },
+                {
+                    name: "keywords",
+                    content: `web development, ${fromName}, feedback, portfolio project, Leons, programming`,
+                },
             ],
         }}
     />
 
     <GlassContainer className="mb-[80px]" transition:animate="slide">
-        <h1 slot="title" class="text-gradient title-gradient-left text-center" transition:name="title">{title}</h1>
-
-        <div class="mt-8">
-            {
-                video ? (
-                    <video
-                        class="w-full rounded-lg border-2 border-light"
-                        controls
-                        poster={image.src}
-                        transition:name={title}
-                    >
-                        <source src={video} type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
-                ) : (
-                    <Image
-                        src={image}
-                        alt={title}
-                        class="w-full rounded-lg border-2 border-light"
-                        transition:name={title}
-                    />
-                )
-            }
-
-            <div class="links flex gap-4 mt-6">
-                {
-                    github && (
-                        <LinkButton href={github} target="_blank" icon="github">
-                            Github
-                        </LinkButton>
-                    )
-                }
-                {
-                    website && (
-                        <LinkButton href={website} target="_blank" icon="click">
-                            Visit
-                        </LinkButton>
-                    )
-                }
-            </div>
-
-            <div class="project-description mt-6 text-gradient title-gradient-left">
-                <Content />
-            </div>
-        </div>
+        <h1 slot="title" class="text-gradient title-gradient-left text-center" transition:name="title">{fromName}</h1>
     </GlassContainer>
 </InfoPage>
 
