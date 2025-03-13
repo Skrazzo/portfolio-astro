@@ -33,12 +33,13 @@ const pageTitle = `${title} | Leons Aleksandrovs Portfolio`;
 let metaDescription = `Explore ${title} - A web development project by Leons Aleksandrovs, showcasing innovative solutions and technical expertise.`;
 if (project.body) {
     // Generate description from markdown, ensuring it's not too long
-    const cleanDescription = project.body
-        .replace(/[#*_]/g, '') // Remove markdown symbols
-        .replace(/\n+/g, ' ')  // Replace newlines with spaces
-        .trim()
-        .slice(0, 157) + '...';
-    
+    const cleanDescription =
+        project.body
+            .replace(/[#*_]/g, "") // Remove markdown symbols
+            .replace(/\n+/g, " ") // Replace newlines with spaces
+            .trim()
+            .slice(0, 157) + "...";
+
     metaDescription = cleanDescription;
 }
 ---
@@ -61,19 +62,22 @@ if (project.body) {
         extend={{
             meta: [
                 { name: "author", content: "Leons Aleksandrovs" },
-                { name: "keywords", content: `web development, ${title}, portfolio project, Leons Aleksandrovs, programming, web design` },
+                {
+                    name: "keywords",
+                    content: `web development, ${title}, portfolio project, Leons Aleksandrovs, programming, web design`,
+                },
                 { property: "og:title", content: pageTitle },
                 { property: "og:description", content: metaDescription },
                 { name: "twitter:card", content: "summary_large_image" },
                 { name: "twitter:title", content: pageTitle },
-                { name: "twitter:description", content: metaDescription }
+                { name: "twitter:description", content: metaDescription },
             ],
         }}
     />
 
     <GlassContainer className="mb-[80px]" transition:animate="slide" as="article">
         <header slot="title" class="text-center">
-            <h1 class="text-gradient title-gradient-left" transition:name="title">{title}</h1>
+            <h1 class="text-gradient title-gradient-left" transition:name={`title-${title}`}>{title}</h1>
         </header>
 
         <section class="mt-8">
@@ -84,7 +88,7 @@ if (project.body) {
                             class="w-full rounded-lg border-2 border-light"
                             controls
                             poster={image.src}
-                            transition:name={title}
+                            transition:name={`video-${title}`}
                             aria-label={`${title} project demonstration video`}
                         >
                             <source src={video} type="video/mp4" />
@@ -104,21 +108,34 @@ if (project.body) {
             <nav class="links flex gap-4 mt-6" aria-label="Project links">
                 {
                     github && (
-                        <LinkButton href={github} target="_blank" icon="github" aria-label={`View ${title} source code on GitHub`}>
+                        <LinkButton
+                            href={github}
+                            target="_blank"
+                            icon="github"
+                            aria-label={`View ${title} source code on GitHub`}
+                        >
                             Github
                         </LinkButton>
                     )
                 }
                 {
                     website && (
-                        <LinkButton href={website} target="_blank" icon="click" aria-label={`Visit ${title} live website`}>
+                        <LinkButton
+                            href={website}
+                            target="_blank"
+                            icon="click"
+                            aria-label={`Visit ${title} live website`}
+                        >
                             Visit
                         </LinkButton>
                     )
                 }
             </nav>
 
-            <section class="project-description mt-6 text-gradient title-gradient-left">
+            <section
+                transition:name={`text-${title}`}
+                class="project-description mt-6 text-gradient title-gradient-left"
+            >
                 <Content />
             </section>
         </section>

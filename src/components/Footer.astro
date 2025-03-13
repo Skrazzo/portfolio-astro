@@ -99,13 +99,17 @@ const isFeedback = isActive(["feedbacks"]);
             href="https://www.linkedin.com/in/leons-aleksandrovs-37304b270"
         />
 
-        <a
-            href="contact"
-            class="max-md:hidden text-mobile-lg py-4 px-7 uppercase font-bold bg-gradient-to-br from-light to-accent-light rounded-lg"
-            aria-label="Contact me via email or other links"
-        >
-            Contact me
-        </a>
+        {
+            !isContact && (
+                <a
+                    href="contact"
+                    class="max-md:hidden text-mobile-lg py-4 px-7 uppercase font-bold bg-gradient-to-br from-light to-accent-light rounded-lg"
+                    aria-label="Contact me via email or other links"
+                >
+                    Contact me
+                </a>
+            )
+        }
     </div>
 </footer>
 

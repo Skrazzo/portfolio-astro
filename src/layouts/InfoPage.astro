@@ -36,7 +36,7 @@ const currentRoute = Astro.url.pathname;
             <header class="page-header">
                 <Header iconName="menu" showBurger={true} />
             </header>
-            
+
             <!-- Background image -->
             <Image
                 src={BackgroundImage}
@@ -49,14 +49,14 @@ const currentRoute = Astro.url.pathname;
             <main class="page-content">
                 <slot />
             </main>
-            
+
             <!-- Footer -->
             <footer class="page-footer">
                 <Footer className={footerClass} currentRoute={currentRoute} />
             </footer>
 
             <!-- Phone waves -->
-            <div class="fixed bottom-0 w-screen md:hidden">
+            <div class="-z-10 fixed bottom-0 w-screen md:hidden">
                 <div class="w-full h-full absolute backdrop-blur-sm bg-background-opacity-80"></div>
                 <Waves className="w-full" />
             </div>
@@ -67,24 +67,25 @@ const currentRoute = Astro.url.pathname;
 </html>
 
 <style>
-    body, html {
+    body,
+    html {
         margin: 0;
         height: 100%;
     }
-    
+
     .page-layout {
         display: grid;
         grid-template-rows: auto 1fr auto;
         min-height: 100vh;
     }
-    
+
     .page-content {
         display: flex;
         flex-direction: column;
         justify-content: center;
         overflow-y: auto;
     }
-    
+
     /* For small content, center it vertically */
     @media (min-height: 768px) {
         .page-content {
