@@ -101,7 +101,12 @@ let containerID = Math.random().toString(36).substring(7);
 
     const toggles = main.querySelectorAll(".toggleFeedback");
     toggles.forEach((toggle) => {
-        toggle.addEventListener("click", () => {
+        toggle.addEventListener("click", (event) => {
+            // if pressed button for fullFeedbackLink do not close the collapse
+            if (event.target.localName === "a" || event.target.localName === "span") {
+                return;
+            }
+
             // Toggle chevron rotation, and color change
             const chevron = main.querySelector("svg.toggleFeedback");
 
