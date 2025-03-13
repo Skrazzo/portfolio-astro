@@ -5,11 +5,6 @@ import Drawer from "~components/Header/Drawer.astro";
 import { ClientRouter } from "astro:transitions";
 import Footer from "~components/Footer.astro";
 import BackgroundImage from "~assets/background.jpeg";
-
-// Cirlces
-// import GradientCircle from "~components/GradientCircle.astro";
-// import Gradient from "javascript-color-gradient";
-// import type { HexColor } from "~types/colors";
 import Waves from "~components/Waves.astro";
 import { Image } from "astro:assets";
 
@@ -20,39 +15,8 @@ interface Props {
 
 const { title, footerClass = "" }: Props = Astro.props;
 
-// Define gradient startColor and endColor, and circleEndColor
-// const circleIncreasePx: number = 175;
-// const endColor: HexColor = "#3B1C77"; // This color is used for gradient end color in a circle
-
-/*
-    Generate gradient colors for circles, and define circle size increase in pixels
-    000113 -> dark background
-    ad55e7 -> accent color
-*/
-// let gradientArray = new Gradient().setColorGradient("#000005", "#ad55e7").setMidpoint(10).getColors() as HexColor[];
-// gradientArray = gradientArray.reverse();
-
-// This was left here, because it lags on firefox
-// Render circles
-// <div class="fixed w-full h-full top-0 left-0 z-[-1] max-md:hidden">
-//     <div
-//         class="w-[200px] rounded-full aspect-square bg-gray-700 absolute top-1/2 -translate-y-1/2 -translate-x-1/2 grid place-items-center"
-//     >
-//         <!-- Check for overflow, and do not allow it -->
-//         {
-//             gradientArray.map((startColor, idx) => (
-//                 <GradientCircle
-//                     w={`${circleIncreasePx * (idx + 1)}px`}
-//                     h={`${circleIncreasePx * (idx + 1)}px`}
-//                     zIndex={(idx + 1) * -1}
-//                     startColor={startColor}
-//                     endColor={endColor}
-//                     deg="-22.5deg"
-//                 />
-//             ))
-//         }
-//     </div>
-// </div>
+// Get current route to pass to footer for proper link handling
+const currentRoute = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -67,34 +31,64 @@ const { title, footerClass = "" }: Props = Astro.props;
         <ClientRouter />
     </head>
     <body class="bg-background">
-        <!-- Navigation bar -->
-        <Header iconName="menu" showBurger={true} />
-        <!-- Render circles background -->
-        <Image
-            src={BackgroundImage}
-            alt={"Background image"}
-            style={{ aspectRatio: "1/0.5442964679" }}
-            class={"background-image"}
-        />
+        <div class="page-layout">
+            <!-- Navigation bar -->
+            <header class="page-header">
+                <Header iconName="menu" showBurger={true} />
+            </header>
+            
+            <!-- Background image -->
+            <Image
+                src={BackgroundImage}
+                alt={"Background image"}
+                style={{ aspectRatio: "1/0.5442964679" }}
+                class={"background-image"}
+            />
 
-        <!-- Phone waves -->
-        <div class="fixed bottom-0 w-screen md:hidden">
-            <div class="w-full h-full absolute backdrop-blur-sm bg-background-opacity-80"></div>
-            <Waves className="w-full" />
+            <!-- Main content area -->
+            <main class="page-content">
+                <slot />
+            </main>
+            
+            <!-- Footer -->
+            <footer class="page-footer">
+                <Footer className={footerClass} currentRoute={currentRoute} />
+            </footer>
+
+            <!-- Phone waves -->
+            <div class="fixed bottom-0 w-screen md:hidden">
+                <div class="w-full h-full absolute backdrop-blur-sm bg-background-opacity-80"></div>
+                <Waves className="w-full" />
+            </div>
+
+            <Drawer />
         </div>
-
-        <!-- Children  -->
-        <slot />
-
-        <Footer className={footerClass} />
-
-        <Drawer />
     </body>
 </html>
 
 <style>
-    body,
-    html {
+    body, html {
         margin: 0;
+        height: 100%;
+    }
+    
+    .page-layout {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100vh;
+    }
+    
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow-y: auto;
+    }
+    
+    /* For small content, center it vertically */
+    @media (min-height: 768px) {
+        .page-content {
+            padding: 2rem 0;
+        }
     }
 </style>

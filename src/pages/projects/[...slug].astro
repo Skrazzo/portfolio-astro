@@ -26,21 +26,31 @@ const { Content } = await render(project);
 // Extract project data
 const { title, image, github, website, video } = project.data;
 
-let metaDescription = `Explore ${title} - A project by Leons, showcasing innovative web development solutions and technical expertise.`;
+// Create a more meaningful and SEO-friendly page title
+const pageTitle = `${title} | Leons Aleksandrovs Portfolio`;
+
+// Create a concise and descriptive meta description
+let metaDescription = `Explore ${title} - A web development project by Leons Aleksandrovs, showcasing innovative solutions and technical expertise.`;
 if (project.body) {
-    // Generate description from markdown
-    metaDescription = project.body.slice(0, 160);
+    // Generate description from markdown, ensuring it's not too long
+    const cleanDescription = project.body
+        .replace(/[#*_]/g, '') // Remove markdown symbols
+        .replace(/\n+/g, ' ')  // Replace newlines with spaces
+        .trim()
+        .slice(0, 157) + '...';
+    
+    metaDescription = cleanDescription;
 }
 ---
 
-<InfoPage>
+<InfoPage title={pageTitle}>
     <SEO
         slot="head"
-        title={`Leons - ${title}`}
+        title={pageTitle}
         description={metaDescription}
         openGraph={{
             basic: {
-                title: `Leons - ${title}`,
+                title: pageTitle,
                 type: "article",
                 image: image.src,
             },
@@ -50,58 +60,68 @@ if (project.body) {
         }}
         extend={{
             meta: [
-                { name: "author", content: "Leons" },
-                { name: "keywords", content: `web development, ${title}, portfolio project, Leons, programming` },
+                { name: "author", content: "Leons Aleksandrovs" },
+                { name: "keywords", content: `web development, ${title}, portfolio project, Leons Aleksandrovs, programming, web design` },
+                { property: "og:title", content: pageTitle },
+                { property: "og:description", content: metaDescription },
+                { name: "twitter:card", content: "summary_large_image" },
+                { name: "twitter:title", content: pageTitle },
+                { name: "twitter:description", content: metaDescription }
             ],
         }}
     />
 
-    <GlassContainer className="mb-[80px]" transition:animate="slide">
-        <h1 slot="title" class="text-gradient title-gradient-left text-center" transition:name="title">{title}</h1>
+    <GlassContainer className="mb-[80px]" transition:animate="slide" as="article">
+        <header slot="title" class="text-center">
+            <h1 class="text-gradient title-gradient-left" transition:name="title">{title}</h1>
+        </header>
 
-        <div class="mt-8">
-            {
-                video ? (
-                    <video
-                        class="w-full rounded-lg border-2 border-light"
-                        controls
-                        poster={image.src}
-                        transition:name={title}
-                    >
-                        <source src={video} type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
-                ) : (
-                    <Image
-                        src={image}
-                        alt={title}
-                        class="w-full rounded-lg border-2 border-light"
-                        transition:name={title}
-                    />
-                )
-            }
+        <section class="mt-8">
+            <figure>
+                {
+                    video ? (
+                        <video
+                            class="w-full rounded-lg border-2 border-light"
+                            controls
+                            poster={image.src}
+                            transition:name={title}
+                            aria-label={`${title} project demonstration video`}
+                        >
+                            <source src={video} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    ) : (
+                        <Image
+                            src={image}
+                            alt={`Screenshot of ${title} project`}
+                            class="w-full rounded-lg border-2 border-light"
+                            transition:name={title}
+                        />
+                    )
+                }
+            </figure>
 
-            <div class="links flex gap-4 mt-6">
+            <nav class="links flex gap-4 mt-6" aria-label="Project links">
                 {
                     github && (
-                        <LinkButton href={github} target="_blank" icon="github">
+                        <LinkButton href={github} target="_blank" icon="github" aria-label={`View ${title} source code on GitHub`}>
                             Github
                         </LinkButton>
                     )
                 }
                 {
                     website && (
-                        <LinkButton href={website} target="_blank" icon="click">
+                        <LinkButton href={website} target="_blank" icon="click" aria-label={`Visit ${title} live website`}>
                             Visit
                         </LinkButton>
                     )
                 }
-            </div>
+            </nav>
 
-            <div class="project-description mt-6 text-gradient title-gradient-left">
+            <section class="project-description mt-6 text-gradient title-gradient-left">
                 <Content />
-            </div>
-        </div>
+            </section>
+        </section>
     </GlassContainer>
 </InfoPage>
 

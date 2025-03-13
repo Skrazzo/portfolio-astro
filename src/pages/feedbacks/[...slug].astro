@@ -7,57 +7,62 @@ import type { CollectionEntry } from "astro:content";
 import { hasFileExtension } from "~utils/hasFileExtension";
 import Stars from "~components/Stars.astro";
 
-// Generate static paths for all projects
+// Generate static paths for all feedback entries
 export async function getStaticPaths() {
-    const projects = await getCollection("feedbacks");
-    return projects
-        .map((project) => ({
-            params: { slug: project.id },
-            props: { project },
+    const feedbacks = await getCollection("feedbacks");
+    return feedbacks
+        .map((feedback) => ({
+            params: { slug: feedback.id },
+            props: { feedback },
         }))
-        .filter((data) => !hasFileExtension(data.props.project.data.fullFeedbackLink || ""));
+        .filter((data) => !hasFileExtension(data.props.feedback.data.fullFeedbackLink || ""));
 }
 
 interface Props {
-    project: CollectionEntry<"feedbacks">;
+    feedback: CollectionEntry<"feedbacks">;
 }
 
-const { project }: Props = Astro.props;
-const { Content } = await render(project);
+const { feedback }: Props = Astro.props;
+const { Content } = await render(feedback);
 
-// Extract project data
-const { fromName, stars, snippet } = project.data;
+// Extract feedback data
+const { fromName, stars, snippet } = feedback.data;
 
 // Set meta description to be the snippet
-let metaDescription = snippet;
+const metaDescription = snippet || `Read ${fromName}'s feedback about Leons Aleksandrovs and his web development work.`;
+const pageTitle = `Feedback from ${fromName} | Leons Aleksandrovs`;
 ---
 
-<InfoPage>
+<InfoPage title={pageTitle}>
     <SEO
         slot="head"
-        title={`Feedback from ${fromName}`}
+        title={pageTitle}
         description={metaDescription}
         extend={{
             meta: [
                 { name: "author", content: fromName },
-                {
-                    name: "keywords",
-                    content: `web development, ${fromName}, feedback, portfolio project, Leons, programming`,
-                },
+                { name: "keywords", content: `web development, ${fromName}, feedback, portfolio, Leons Aleksandrovs, programming, testimonial` },
+                { property: "og:title", content: pageTitle },
+                { property: "og:description", content: metaDescription },
+                { property: "og:type", content: "article" },
+                { name: "twitter:card", content: "summary" },
+                { name: "twitter:title", content: pageTitle },
+                { name: "twitter:description", content: metaDescription }
             ],
         }}
     />
 
-    <GlassContainer className="mb-[80px]" transition:animate="slide">
-        <div slot="title" class="w-full flex max-sm:flex-col gap-2 items-center justify-between mb-4">
-            <h4 class="text-gradient title-gradient-left" transition:name={fromName}>
+    <GlassContainer className="mb-[80px]" transition:animate="slide" as="section">
+        <header slot="title" class="w-full flex max-sm:flex-col gap-2 items-center justify-between mb-4">
+            <h1 class="text-gradient title-gradient-left" transition:name={fromName}>
                 {fromName}
-            </h4>
+            </h1>
             <Stars stars={stars} starTransition={`star-${fromName}`} />
-        </div>
-        <main class="text-container">
+        </header>
+        
+        <article class="text-container">
             <Content />
-        </main>
+        </article>
     </GlassContainer>
 </InfoPage>
 
@@ -113,13 +118,4 @@ let metaDescription = snippet;
             opacity: 1;
         }
     }
-
-    /* @media (max-width: 768px) { */
-    /*     .text-container { */
-    /*         h2 { */
-    /*             text-align: center; */
-    /*             width: 100%; */
-    /*         } */
-    /*     } */
-    /* } */
 </style>
