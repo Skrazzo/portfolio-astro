@@ -109,7 +109,7 @@ const feedbackCollection = (await getCollection("feedbacks")) as CollectionEntry
                             <span style={{ backgroundColor: skill.color }}>{skill.name}</span>
 
                             <Image
-                                class={"w-[56px] h-[56px] md:w-[96px] md:h-[96px]"}
+                                class={"w-[56px] h-[56px] md:w-[96px] md:h-[96px] object-contain"}
                                 loading={"lazy"}
                                 src={skill.src}
                                 alt={`${skill.name} logo`}

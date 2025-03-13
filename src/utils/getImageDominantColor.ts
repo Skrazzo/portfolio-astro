@@ -39,5 +39,9 @@ export function getProminentColorFromSVG(filePath: string): string {
         }
     });
 
+    if (filePath.includes("ode")) {
+        console.log(prominentColor);
+    }
+
     return shadeColor(prominentColor, -10);
 }
