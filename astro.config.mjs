@@ -10,7 +10,7 @@ import react from "@astrojs/react";
 // https://astro.build/config
 // TODO: Add sitemap maybe
 export default defineConfig({
-    base: "/v2/",
+    base: "/",
     devToolbar: {
         enabled: false,
     },
