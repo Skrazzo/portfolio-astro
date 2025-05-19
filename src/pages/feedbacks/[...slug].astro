@@ -41,13 +41,16 @@ const pageTitle = `Feedback from ${fromName} | Leons Aleksandrovs`;
         extend={{
             meta: [
                 { name: "author", content: fromName },
-                { name: "keywords", content: `web development, ${fromName}, feedback, portfolio, Leons Aleksandrovs, programming, testimonial` },
+                {
+                    name: "keywords",
+                    content: `web development, ${fromName}, feedback, portfolio, Leons Aleksandrovs, programming, testimonial`,
+                },
                 { property: "og:title", content: pageTitle },
                 { property: "og:description", content: metaDescription },
                 { property: "og:type", content: "article" },
                 { name: "twitter:card", content: "summary" },
                 { name: "twitter:title", content: pageTitle },
-                { name: "twitter:description", content: metaDescription }
+                { name: "twitter:description", content: metaDescription },
             ],
         }}
     />
@@ -59,7 +62,7 @@ const pageTitle = `Feedback from ${fromName} | Leons Aleksandrovs`;
             </h1>
             <Stars stars={stars} starTransition={`star-${fromName}`} />
         </header>
-        
+
         <article class="text-container">
             <Content />
         </article>
