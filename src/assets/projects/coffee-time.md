@@ -4,7 +4,7 @@ image: "./coffee-time.webp"
 github: "https://github.com/Skrazzo/CoffeeTime"
 website:
 video: videos/coffeereview.mp4
-order: 4
+order: 6
 ---
 
 This project was created to enhance my proficiency in CSS and website development.
