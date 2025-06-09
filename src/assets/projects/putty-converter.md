@@ -1,10 +1,10 @@
 ---
 title: Putty to OpenSSH converter
-image: "./putty-converter.webp"
+order: 2
+image: ./putty-converter.webp
 github: https://github.com/Skrazzo/Putty-to-open-ssh-converter
-website: "https://skrazzo.xyz/putty"
+website: https://skrazzo.xyz/putty
 video: videos/putty-converter.mp4
-order: 100
 ---
 
 ## PuTTY to OpenSSH Converter

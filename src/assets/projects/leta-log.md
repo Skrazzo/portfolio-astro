@@ -1,10 +1,10 @@
 ---
-title: "LETA-Log"
-image: "./leta-log.webp"
-github: "https://github.com/Skrazzo/leta-log"
+title: LETA-Log
+order: 5
+image: ./leta-log.webp
+github: https://github.com/Skrazzo/leta-log
 website: ""
 video: videos/leta-log.mp4
-order: 4
 ---
 
 The goal was to build more than just a static blog. I aimed for a dynamic platform where users can:

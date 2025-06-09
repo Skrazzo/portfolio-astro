@@ -1,10 +1,10 @@
 ---
-title: "Web tickets store"
-image: "./web-tickets.webp"
-github: "https://github.com/Skrazzo/Web-Ticket-Store"
-website:
+title: Web tickets store
+order: 9
+image: ./web-tickets.webp
+github: https://github.com/Skrazzo/Web-Ticket-Store
+website: ""
 video: videos/ticketsreview.mp4
-order: 6
 ---
 
 Using **Laravel, Breeze for authentication and Stripe for payments**, it is a simple ticket store with basic functions.

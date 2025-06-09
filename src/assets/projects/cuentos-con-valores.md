@@ -1,10 +1,10 @@
 ---
-title: "Cuentos con valores"
-image: "./cuentos-con-valores.jpeg"
+title: Cuentos con valores
+order: 4
+image: ./cuentos-con-valores.jpeg
 github: ""
-website: "https://cuentosconvalor.es/"
+website: https://cuentosconvalor.es/
 video: videos/cuentos-con-valores.mp4
-order: 3
 ---
 
 This project is a server-rendered React application developed for a client who is a publisher of children's books. The primary goal was to create an engaging online platform to showcase their work, provide information about their publications, and facilitate direct contact with potential readers and collaborators.

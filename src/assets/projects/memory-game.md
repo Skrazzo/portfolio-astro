@@ -1,10 +1,10 @@
 ---
-title: "Memory game"
-image: "./memory-game.webp"
-github: "https://github.com/Skrazzo/memory-game"
-website:
+title: Memory game
+order: 7
+image: ./memory-game.webp
+github: https://github.com/Skrazzo/memory-game
+website: ""
 video: videos/memory-game-review.mp4
-order: 5
 ---
 
 Made with **Laravel, Breeze authentication system, React, tailwindcss, SCSS** and combined everything with Inertia.
